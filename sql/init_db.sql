@@ -58,7 +58,7 @@ create table COMPTE (
    MAIL                 VARCHAR(70)          null,
    DATENAISSANCE        DATE                 null,
    TELEPHONE            VARCHAR(10)          null,
-   URLIMAGE             TEXT                 null,
+   URLIMAGECOMPTE             TEXT                 null,
    MDP			VARCHAR(40)	     not null,
    constraint PK_COMPTE primary key (IDCOMPTE)
 );
@@ -120,8 +120,8 @@ ALTER TABLE POST
 
 
 
-INSERT INTO COMPTE (PSEUDO, NOM, PRENOM, MAIL, DATENAISSANCE, TELEPHONE, URLIMAGE, MDP) VALUES
-('alan_smithee', 'Smithee', 'Alan', 'alan.smithee@example.com', '1975-08-15', '0612345678', 'http://example.com/image1.jpg','Docker'),
+INSERT INTO COMPTE (PSEUDO, NOM, PRENOM, MAIL, DATENAISSANCE, TELEPHONE, URLIMAGECOMPTE, MDP) VALUES
+('alan_smithee', 'Smithee', 'Alan', 'alan.smithee@example.com', '1975-08-15', '0612345678', 'https://media.licdn.com/dms/image/v2/D4E03AQGpEqqMLKPi5g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1729075132234?e=2147483647&v=beta&t=XZONS51nO--_1mh4ngDroIDwFZAwgJTL8EG4axBDnQg','Docker'),
 ('arthur_besse', 'Besse', 'Arthur', 'arthur.besse@example.com', '1982-11-22', '0623456789', 'http://example.com/image2.jpg','Docker'),
 ('franz_bibfeldt', 'Bibfeldt', 'Franz', 'franz.bibfeldt@example.com', '1990-03-10', '0634567890', 'http://example.com/image3.jpg','Docker'),
 ('jean_baptiste_botul', 'Botul', 'Jean-Baptiste', 'jean-baptiste.botul@example.com', '1985-06-30', '0645678901', 'http://example.com/image4.jpg','Docker'),

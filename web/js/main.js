@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 userInfo.classList.add('user-info');
 
                 const userAvatar = document.createElement('img');
-                userAvatar.src = "https://via.placeholder.com/40";
+                userAvatar.src = post.urlimagecompte;
                 userAvatar.alt = "User Avatar";
 
                 const userDetails = document.createElement('div');
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const likesCount = document.createElement('span');
                 likesCount.style.color = "#aaa";
-                likesCount.textContent = `· ${post.compteurlike} likes`;
+                likesCount.textContent = ` · ${post.compteurlike} likes`;
 
                 userDetails.appendChild(username);
                 userDetails.appendChild(likesCount);
