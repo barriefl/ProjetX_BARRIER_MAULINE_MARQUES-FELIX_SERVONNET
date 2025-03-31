@@ -149,13 +149,8 @@ INSERT INTO POST (IDCOMPTE, DESCRIPTION, URLIMAGE, COMPTEURLIKE) VALUES
 ('4','OMAR SY : L''INTERVIEW FACE CACHÉE Dispo sur YouTube  https://youtu.be/2yVrWk9WQ2s','https://www.agoravox.tv/local/cache-vignettes/L476xH268/omar-sy-interview-hugo-99372.jpg',8),
 ('5','Il annonce qu''il jouera son dernier match avec le psg dimanche, temps gagné 3 min 40','https://web.cameroonmagazine.com/wp-content/uploads/2024/05/VIDEO-Kylian-Mbappe-annonce-publiquement-son-depart-du-PSG.jpg',18);
 
-<<<<<<< HEAD
-INSERT INTO COMMENTAIRE (IDCOMPTE, IDPOSTE, TEXTE) VALUES
-=======
-
 
 INSERT INTO COMMENTAIRE (IDCOMPTE, IDPOST, TEXTE) VALUES
->>>>>>> 20f69b864c0e1af47f508533e1e3fc8a806c7732
 (18,2,'Pourquoi vous donnez de la force a un detraqué comme lui'),
 (8,3,'Je pense tu fait 3 fois mon paf en vrai'),
 (1,5,'Merci tu gères'),

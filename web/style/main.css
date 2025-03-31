@@ -315,3 +315,17 @@ body {
  .trends li .title {
      font-weight: bold;
  }
+
+ .post img{
+    max-width: 475px;
+    max-height: 550px;
+}
+
+.imgcomment{
+    width: 25px;
+    height: 25px;
+}
+
+.butcomment{
+    border: none;
+}
