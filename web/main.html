@@ -11,6 +11,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
     />
+    <script src="js/main.js" defer></script>
   </head>
   <body>
     <div class="sidebar">
@@ -118,24 +119,6 @@
           <span>38 M</span>
         </div>
       </div>
-      <?php foreach ($posts as $post): ?>
-        <div class="post">
-            <div class="user-info">
-                <img src="https://via.placeholder.com/40" alt="User Avatar" />
-                <div>
-                    <span class="username">Utilisateur <?php echo htmlspecialchars($post['IDCOMPTE']); ?></span>
-                    <span style="color: #aaa">· <?php echo htmlspecialchars($post['COMPTEURLIKE']); ?> likes</span>
-                </div>
-            </div>
-            <div class="content">
-                <p><?php echo htmlspecialchars($post['DESCRIPTION']); ?></p>
-                <img src="<?php echo htmlspecialchars($post['URLIMAGE']); ?>" alt="Post Image">
-            </div>
-            <div class="actions">
-                <span><?php echo htmlspecialchars($post['COMPTEURLIKE']); ?> likes</span>
-            </div>
-        </div>
-    <?php endforeach; ?>
     </div>
     <div class="container">
       <!-- Barre de recherche -->
