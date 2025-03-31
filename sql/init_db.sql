@@ -139,8 +139,7 @@ INSERT INTO COMPTE (PSEUDO, NOM, PRENOM, MAIL, DATENAISSANCE, TELEPHONE, URLIMAG
 ('franz_bibfeldt', 'Bibfeldt', 'Franz', 'franz.bibfeldt2@example.com', '1990-03-10', '0678901235', 'http://example.com/image16.jpg','Docker'),
 ('jean_baptiste_botul', 'Botul', 'Jean-Baptiste', 'jean-baptiste.botul2@example.com', '1985-06-30', '0689012346', 'http://example.com/image17.jpg','Docker'),
 ('blanche_descartes', 'Descartes', 'Blanche', 'blanche.descartes2@example.com', '1992-07-25', '0690123457', 'http://example.com/image18.jpg','Docker'),
-('ptit_loup_blanc', 'Diard', 'Benoit', 'benoit.diart@gmail.com', '1992-07-25', '0620123457', 'https://yt3.googleusercontent.com/ytc/AIf8zZTxYl71_NKMyOWfsEa7HW67NkgmVR_39MeJRo3a=s900-c-k-c0x00ffffff-no-rj','Docker');
-
+('ptit_loup_blanc', 'Diard', 'Benoit', 'benoit.diard@gmail.com', '1992-07-25', '0620123457', 'https://yt3.googleusercontent.com/ytc/AIf8zZTxYl71_NKMyOWfsEa7HW67NkgmVR_39MeJRo3a=s900-c-k-c0x00ffffff-no-rj','Docker');
 
 
 INSERT INTO POST (IDCOMPTE, DESCRIPTION, URLIMAGE, COMPTEURLIKE) VALUES
@@ -149,8 +148,6 @@ INSERT INTO POST (IDCOMPTE, DESCRIPTION, URLIMAGE, COMPTEURLIKE) VALUES
 ('3','Vous pensez je mesure combien d''iphone','https://m1.quebecormedia.com/emp/emp/Capture_d_e_cran_le_2022_10_25_a_16.09.58661f1f0c-1963-4dc4-a971-4bb400402043_ORIGINAL.jpg?impolicy=crop-resize&x=0&y=49&w=1164&h=653&width=1200',13),
 ('4','OMAR SY : L''INTERVIEW FACE CACHÉE Dispo sur YouTube  https://youtu.be/2yVrWk9WQ2s','https://www.agoravox.tv/local/cache-vignettes/L476xH268/omar-sy-interview-hugo-99372.jpg',8),
 ('5','Il annonce qu''il jouera son dernier match avec le psg dimanche, temps gagné 3 min 40','https://web.cameroonmagazine.com/wp-content/uploads/2024/05/VIDEO-Kylian-Mbappe-annonce-publiquement-son-depart-du-PSG.jpg',18);
-
-
 
 INSERT INTO COMMENTAIRE (IDCOMPTE, IDPOSTE, TEXTE) VALUES
 (18,2,'Pourquoi vous donnez de la force a un detraqué comme lui'),

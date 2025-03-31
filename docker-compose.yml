@@ -10,7 +10,7 @@ services:
       - ./data:/var/lib/postgresql/data  # Pour persister les données
       - ./sql/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql  # Pour exécuter ton script SQL à l'initialisation
     ports:
-      - "5432:5432"  # Exposer le port PostgreSQL pour la connexion
+      - "3945:3945"  # Exposer le port PostgreSQL pour la connexion
     networks:
       - my_network
     restart: always
