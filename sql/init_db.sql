@@ -4,14 +4,12 @@
 /*==============================================================*/
 
 drop table A_LIKE;
-
 drop table A_RETWEET;
-
 drop table COMMENTAIRE;
-
 drop table COMPTE;
-
 drop table POST;
+
+
 
 /*==============================================================*/
 /* Table : A_LIKE                                               */
@@ -21,6 +19,7 @@ create table A_LIKE (
    IDPOSTE              INT4                 not null,
    constraint PK_A_LIKE primary key (IDCOMPTE, IDPOSTE)
 );
+
 
 
 /*==============================================================*/
@@ -80,6 +79,7 @@ create table POST (
 );
 
 
+
 alter table A_LIKE
    add constraint FK_A_LIKE_A_LIKE_COMPTE foreign key (IDCOMPTE)
       references COMPTE (IDCOMPTE)
@@ -119,7 +119,8 @@ ALTER TABLE POST
 	MODIFY COLUMN date DATE DEFAULT CURRENT_DATE;
 
 
-insert into COMPTE (PSEUDO, NOM, PRENOM, MAIL, DATENAISSANCE, TELEPHONE, URLIMAGE, MDP) values
+
+INSERT INTO COMPTE (PSEUDO, NOM, PRENOM, MAIL, DATENAISSANCE, TELEPHONE, URLIMAGE, MDP) VALUES
 ('alan_smithee', 'Smithee', 'Alan', 'alan.smithee@example.com', '1975-08-15', '0612345678', 'http://example.com/image1.jpg','Docker'),
 ('arthur_besse', 'Besse', 'Arthur', 'arthur.besse@example.com', '1982-11-22', '0623456789', 'http://example.com/image2.jpg','Docker'),
 ('franz_bibfeldt', 'Bibfeldt', 'Franz', 'franz.bibfeldt@example.com', '1990-03-10', '0634567890', 'http://example.com/image3.jpg','Docker'),
@@ -140,19 +141,25 @@ insert into COMPTE (PSEUDO, NOM, PRENOM, MAIL, DATENAISSANCE, TELEPHONE, URLIMAG
 ('blanche_descartes', 'Descartes', 'Blanche', 'blanche.descartes2@example.com', '1992-07-25', '0690123457', 'http://example.com/image18.jpg','Docker');
 ('ptit_loup_blanc', 'Diard', 'Benoit', 'benoit.diart@gmail.com', '1992-07-25', '0620123457', 'https://yt3.googleusercontent.com/ytc/AIf8zZTxYl71_NKMyOWfsEa7HW67NkgmVR_39MeJRo3a=s900-c-k-c0x00ffffff-no-rj','Docker');
 
-INSERT INTO POST (IDCOMPTE, DESCRIPTION, URLIMAGE, COMPTEURLIKE) values
-('1','Top 7 des rappeurs qui se sont deja fait djoufara. TOP 7 ...','https://www.lexpress.fr/resizer/gWttpIey3Dg75MChpRWQjtt1j-o=/883x0/cloudfront-eu-central-1.images.arcpublishing.com/lexpress/LFQZF36YDJA6ZDLQXH4JVRAKCY.jpg',20),
-('2','Salut mes pupuces nouveaux showcases a l'AZAR STUDIO 52 dimanche soir 23h','https://th.bing.com/th/id/OIP.CAf0BGuAyhkXHkAt98-PJwHaIf?rs=1&pid=ImgDetMain',10),
-('3','Vous pensez je mesure combien d'iphone','https://m1.quebecormedia.com/emp/emp/Capture_d_e_cran_le_2022_10_25_a_16.09.58661f1f0c-1963-4dc4-a971-4bb400402043_ORIGINAL.jpg?impolicy=crop-resize&x=0&y=49&w=1164&h=653&width=1200',13),
-('4','OMAR SY : L'INTERVIEW FACE CACHÉE Dispo sur YouTube  https://youtu.be/2yVrWk9WQ2s','https://www.agoravox.tv/local/cache-vignettes/L476xH268/omar-sy-interview-hugo-99372.jpg',8),
-('5','Il annonce qu'il jouera son dernier match avec le psg dimanche, temps gagné 3 min 40','https://web.cameroonmagazine.com/wp-content/uploads/2024/05/VIDEO-Kylian-Mbappe-annonce-publiquement-son-depart-du-PSG.jpg',18);
 
-INSERT INTO COMMENTAIRE (IDCOMPTE, IDPOST, TEXTE) values
+
+INSERT INTO POST (IDCOMPTE, DESCRIPTION, URLIMAGE, COMPTEURLIKE) VALUES
+('1','Top 7 des rappeurs qui se sont deja fait djoufara. TOP 7 ...','https://www.lexpress.fr/resizer/gWttpIey3Dg75MChpRWQjtt1j-o=/883x0/cloudfront-eu-central-1.images.arcpublishing.com/lexpress/LFQZF36YDJA6ZDLQXH4JVRAKCY.jpg',20),
+('2','Salut mes pupuces nouveaux showcases a l''AZAR STUDIO 52 dimanche soir 23h','https://th.bing.com/th/id/OIP.CAf0BGuAyhkXHkAt98-PJwHaIf?rs=1&pid=ImgDetMain',10),
+('3','Vous pensez je mesure combien d''iphone','https://m1.quebecormedia.com/emp/emp/Capture_d_e_cran_le_2022_10_25_a_16.09.58661f1f0c-1963-4dc4-a971-4bb400402043_ORIGINAL.jpg?impolicy=crop-resize&x=0&y=49&w=1164&h=653&width=1200',13),
+('4','OMAR SY : L''INTERVIEW FACE CACHÉE Dispo sur YouTube  https://youtu.be/2yVrWk9WQ2s','https://www.agoravox.tv/local/cache-vignettes/L476xH268/omar-sy-interview-hugo-99372.jpg',8),
+('5','Il annonce qu''il jouera son dernier match avec le psg dimanche, temps gagné 3 min 40','https://web.cameroonmagazine.com/wp-content/uploads/2024/05/VIDEO-Kylian-Mbappe-annonce-publiquement-son-depart-du-PSG.jpg',18);
+
+
+
+INSERT INTO COMMENTAIRE (IDCOMPTE, IDPOST, TEXTE) VALUES
 (18,2,'Pourquoi vous donnez de la force a un detraqué comme lui'),
 (8,3,'Je pense tu fait 3 fois mon paf en vrai'),
 (1,5,'Merci tu gères'),
-(4,1,'C'est bon on a compris. En plus favé il fait des bons sons surtout le dernier'),
-(12,4,'Grave intéressant comme d'hab');
+(4,1,'C''est bon on a compris. En plus favé il fait des bons sons surtout le dernier'),
+(12,4,'Grave intéressant comme d''hab');
+
+
 
 INSERT INTO A_LIKE (IDCOMPTE, IDPOST) VALUES 
 (3, 2), (12, 4), (1, 5), (18, 3), (7, 1), 
@@ -162,7 +169,8 @@ INSERT INTO A_LIKE (IDCOMPTE, IDPOST) VALUES
 (9, 2), (18, 5), (1, 3), (7, 4), (14, 1),
 (8, 2), (16, 3), (5, 5), (6, 4), (11, 1);
 
+
+
 INSERT INTO A_RETWEET (IDCOMPTE, IDPOST) VALUES 
 (3, 2), (12, 4), (1, 5), (18, 3), (7, 1),
 (14, 2), (9, 4), (11, 5), (5, 3), (6, 1);
-

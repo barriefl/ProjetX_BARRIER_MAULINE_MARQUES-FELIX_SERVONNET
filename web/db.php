@@ -32,4 +32,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo "Veuillez remplir tous les champs.";
     }
 }
+
+// Récupère les données des posts X.
+try {
+    $stmt = $pdo->query("SELECT * FROM POST");
+    $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    echo "Erreur lors de la récupération des posts : " . $e->getMessage();
+    exit;
+}
 ?>
