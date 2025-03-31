@@ -18,7 +18,15 @@ function connectToDatabase() {
 // Fonction pour récupérer les posts
 function fetchPosts($pdo) {
     try {
-        $stmt = $pdo->prepare("SELECT * FROM POST");
+        $query = "
+            SELECT 
+                *
+            FROM
+                POST p
+            LEFT JOIN
+                compte c ON p.IDCOMPTE = c.IDCOMPTE
+        ";
+        $stmt = $pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {

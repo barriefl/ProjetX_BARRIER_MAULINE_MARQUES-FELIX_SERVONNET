@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const username = document.createElement('span');
                 username.classList.add('username');
-                username.textContent = `Utilisateur ${post.idcompte}`;
+                username.textContent = `${post.nom}`;
 
                 const likesCount = document.createElement('span');
                 likesCount.style.color = "#aaa";
