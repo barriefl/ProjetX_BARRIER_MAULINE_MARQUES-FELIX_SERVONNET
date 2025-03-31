@@ -16,8 +16,8 @@ drop table if exists POST cascade;
 /*==============================================================*/
 create table A_LIKE (
    IDCOMPTE             INT4                 not null,
-   IDPOSTE              INT4                 not null,
-   constraint PK_A_LIKE primary key (IDCOMPTE, IDPOSTE)
+   IDPOST              INT4                 not null,
+   constraint PK_A_LIKE primary key (IDCOMPTE, IDPOST)
 );
 
 
@@ -27,8 +27,8 @@ create table A_LIKE (
 /*==============================================================*/
 create table A_RETWEET (
    IDCOMPTE             INT4                 not null,
-   IDPOSTE              INT4                 not null,
-   constraint PK_A_RETWEET primary key (IDCOMPTE, IDPOSTE)
+   IDPOST              INT4                 not null,
+   constraint PK_A_RETWEET primary key (IDCOMPTE, IDPOST)
 );
 
 
@@ -39,7 +39,7 @@ create table A_RETWEET (
 create table COMMENTAIRE (
    IDCOMMENTAIRE        SERIAL               not null,
    IDCOMPTE             INT4                 not null,
-   IDPOSTE             INT4                 not null,
+   IDPOST               INT4                 not null,
    TEXTE                VARCHAR(300)         null,
    DATECOMMENTAIRE      DATE                 null,
    constraint PK_COMMENTAIRE primary key (IDCOMMENTAIRE)
@@ -58,7 +58,7 @@ create table COMPTE (
    MAIL                 VARCHAR(70)          null,
    DATENAISSANCE        DATE                 null,
    TELEPHONE            VARCHAR(10)          null,
-   URLIMAGE             TEXT                 null,
+   URLIMAGECOMPTE             TEXT                 null,
    MDP			VARCHAR(40)	     not null,
    constraint PK_COMPTE primary key (IDCOMPTE)
 );
@@ -69,13 +69,13 @@ create table COMPTE (
 /* Table : POST                                                 */
 /*==============================================================*/
 create table POST (
-   IDPOSTE              SERIAL               not null,
+   IDPOST              SERIAL               not null,
    IDCOMPTE             INT4                 not null,
    DESCRIPTION          VARCHAR(400)         null,
    URLIMAGE             TEXT                 null,
    COMPTEURLIKE         INT4                 null,
-   DATEPOST			DATE		     null,
-   constraint PK_POST primary key (IDPOSTE)
+   DATEPOST			      DATE		            null,
+   constraint PK_POST primary key (IDPOST)
 );
 
 
@@ -86,8 +86,8 @@ alter table A_LIKE
       on delete restrict on update restrict;
 
 alter table A_LIKE
-   add constraint FK_A_LIKE_A_LIKE2_POST foreign key (IDPOSTE)
-      references POST (IDPOSTE)
+   add constraint FK_A_LIKE_A_LIKE2_POST foreign key (IDPOST)
+      references POST (IDPOST)
       on delete restrict on update restrict;
 
 alter table A_RETWEET
@@ -96,8 +96,8 @@ alter table A_RETWEET
       on delete restrict on update restrict;
 
 alter table A_RETWEET
-   add constraint FK_A_RETWEE_A_RETWEET_POST foreign key (IDPOSTE)
-      references POST (IDPOSTE)
+   add constraint FK_A_RETWEE_A_RETWEET_POST foreign key (IDPOST)
+      references POST (IDPOST)
       on delete restrict on update restrict;
 
 alter table COMMENTAIRE
@@ -106,8 +106,8 @@ alter table COMMENTAIRE
       on delete restrict on update restrict;
 
 alter table COMMENTAIRE
-   add constraint FK_COMMENTA_ASSOCIATI_POST foreign key (IDPOSTE)
-      references POST (IDPOSTE)
+   add constraint FK_COMMENTA_ASSOCIATI_POST foreign key (IDPOST)
+      references POST (IDPOST)
       on delete restrict on update restrict;
 
 alter table POST
@@ -116,12 +116,12 @@ alter table POST
       on delete restrict on update restrict;
 
 ALTER TABLE POST
-	alter COLUMN DATEPOST SET DEFAULT CURRENT_DATE;
+	ALTER COLUMN DATEPOST SET DEFAULT CURRENT_DATE;
 
 
 
-INSERT INTO COMPTE (PSEUDO, NOM, PRENOM, MAIL, DATENAISSANCE, TELEPHONE, URLIMAGE, MDP) VALUES
-('alan_smithee', 'Smithee', 'Alan', 'alan.smithee@example.com', '1975-08-15', '0612345678', 'http://example.com/image1.jpg','Docker'),
+INSERT INTO COMPTE (PSEUDO, NOM, PRENOM, MAIL, DATENAISSANCE, TELEPHONE, URLIMAGECOMPTE, MDP) VALUES
+('alan_smithee', 'Smithee', 'Alan', 'alan.smithee@example.com', '1975-08-15', '0612345678', 'https://media.licdn.com/dms/image/v2/D4E03AQGpEqqMLKPi5g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1729075132234?e=2147483647&v=beta&t=XZONS51nO--_1mh4ngDroIDwFZAwgJTL8EG4axBDnQg','Docker'),
 ('arthur_besse', 'Besse', 'Arthur', 'arthur.besse@example.com', '1982-11-22', '0623456789', 'http://example.com/image2.jpg','Docker'),
 ('franz_bibfeldt', 'Bibfeldt', 'Franz', 'franz.bibfeldt@example.com', '1990-03-10', '0634567890', 'http://example.com/image3.jpg','Docker'),
 ('jean_baptiste_botul', 'Botul', 'Jean-Baptiste', 'jean-baptiste.botul@example.com', '1985-06-30', '0645678901', 'http://example.com/image4.jpg','Docker'),
@@ -149,7 +149,13 @@ INSERT INTO POST (IDCOMPTE, DESCRIPTION, URLIMAGE, COMPTEURLIKE) VALUES
 ('4','OMAR SY : L''INTERVIEW FACE CACHÉE Dispo sur YouTube  https://youtu.be/2yVrWk9WQ2s','https://www.agoravox.tv/local/cache-vignettes/L476xH268/omar-sy-interview-hugo-99372.jpg',8),
 ('5','Il annonce qu''il jouera son dernier match avec le psg dimanche, temps gagné 3 min 40','https://web.cameroonmagazine.com/wp-content/uploads/2024/05/VIDEO-Kylian-Mbappe-annonce-publiquement-son-depart-du-PSG.jpg',18);
 
+<<<<<<< HEAD
 INSERT INTO COMMENTAIRE (IDCOMPTE, IDPOSTE, TEXTE) VALUES
+=======
+
+
+INSERT INTO COMMENTAIRE (IDCOMPTE, IDPOST, TEXTE) VALUES
+>>>>>>> 20f69b864c0e1af47f508533e1e3fc8a806c7732
 (18,2,'Pourquoi vous donnez de la force a un detraqué comme lui'),
 (8,3,'Je pense tu fait 3 fois mon paf en vrai'),
 (1,5,'Merci tu gères'),
@@ -158,7 +164,7 @@ INSERT INTO COMMENTAIRE (IDCOMPTE, IDPOSTE, TEXTE) VALUES
 
 
 
-INSERT INTO A_LIKE (IDCOMPTE, IDPOSTE) VALUES 
+INSERT INTO A_LIKE (IDCOMPTE, IDPOST) VALUES 
 (3, 2), (12, 4), (1, 5), (18, 3), (7, 1), 
 (14, 2), (9, 4), (11, 5), (5, 3), (6, 1),
 (13, 2), (17, 4), (8, 5), (2, 3), (4, 1),
@@ -168,6 +174,6 @@ INSERT INTO A_LIKE (IDCOMPTE, IDPOSTE) VALUES
 
 
 
-INSERT INTO A_RETWEET (IDCOMPTE, IDPOSTE) VALUES 
+INSERT INTO A_RETWEET (IDCOMPTE, IDPOST) VALUES 
 (3, 2), (12, 4), (1, 5), (18, 3), (7, 1),
 (14, 2), (9, 4), (11, 5), (5, 3), (6, 1);

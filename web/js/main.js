@@ -1,91 +1,70 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const modalInscription = document.querySelector(".modal-inscription");
-    const modalConnexion = document.querySelector(".modal-connexion");
-    const btnCreate = document.querySelector(".btn-create");
-    const btnLogin = document.querySelector(".btn-login");
-    const closeButtons = document.querySelectorAll(".close-modal");
-
-    // Fonction pour ouvrir une modale
-    function openModal(modal) {
-        modal.style.display = "flex";
-    }
-
-    // Fonction pour fermer une modale
-    function closeModal(modal) {
-        modal.style.display = "none";
-    }
-
-    // Ouvrir la modale d'inscription
-    btnCreate.addEventListener("click", () => {
-        openModal(modalInscription);
-    });
-
-    // Ouvrir la modale de connexion
-    btnLogin.addEventListener("click", () => {
-        openModal(modalConnexion);
-    });
-
-    // Fermer les modales en cliquant sur le bouton (X)
-    closeButtons.forEach((button) => {
-        button.addEventListener("click", (event) => {
-            const modal = event.target.closest(".modal-container");
-            closeModal(modal);
-        });
-    });
-
-    // Fermer la modale en cliquant à l'extérieur du contenu
-    window.addEventListener("click", (event) => {
-        if (event.target.classList.contains("modal-container")) {
-            closeModal(event.target);
-        }
-    });
-
-        // Gestion de la connexion
-// Gestion de la connexion
-const connexionForm = document.getElementById("connexionForm");
-
-if (connexionForm) {
-    connexionForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        const email = document.getElementById("connexionEmail").value;
-        console.log(email)
-        const password = document.getElementById("connexionPassword").value;
-        console.log(password)
-        // Récupérer l'attribut data dans le formulaire
-        const userData = {
-            email: email,
-            password: password
-        };
-        console.log(userData)
-        fetch("db.php", {  // Vérifie bien le chemin ici (selon ton projet)
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: `data=${encodeURIComponent(JSON.stringify(userData))}`
-        })
-        .then(response => response.json()) // Convertit la réponse en JSON
+    fetch('../back/fetch_posts.php')
+        .then(response => response.json())
         .then(data => {
-            alert(data.message); // Affiche le message du serveur
-            if (data.success) {
-                // Si la connexion réussie, envoie les informations du compte dans main.html via localStorage
-                localStorage.setItem('userData', JSON.stringify(data.user)); // Sauvegarder les infos dans le localStorage
-                window.location.href = "main.html"; // Redirige vers main.html
-            }
+            console.log(data);
+            const postsContainer = document.querySelector('.posts-container');
+            console.log(postsContainer)
+            data.forEach(post => {
+                console.log(post)
+                // Création de l'élément principal du post
+                const postElement = document.createElement('div');
+                postElement.classList.add('post');
+
+                // Création de la section user-info
+                const userInfo = document.createElement('div');
+                userInfo.classList.add('user-info');
+
+                const userAvatar = document.createElement('img');
+                userAvatar.src = post.urlimagecompte;
+                userAvatar.alt = "User Avatar";
+
+                const userDetails = document.createElement('div');
+
+                const username = document.createElement('span');
+                username.classList.add('username');
+                username.textContent = `${post.nom}`;
+
+                const likesCount = document.createElement('span');
+                likesCount.style.color = "#aaa";
+                likesCount.textContent = ` · ${post.compteurlike} likes`;
+
+                userDetails.appendChild(username);
+                userDetails.appendChild(likesCount);
+                userInfo.appendChild(userAvatar);
+                userInfo.appendChild(userDetails);
+
+                // Création de la section content
+                const content = document.createElement('div');
+                content.classList.add('content');
+
+                const description = document.createElement('p');
+                description.textContent = post.description;
+
+                const postImage = document.createElement('img');
+                postImage.src = post.urlimage;
+                postImage.alt = "Post Image";
+
+                content.appendChild(description);
+                content.appendChild(postImage);
+
+                // Création de la section actions
+                const actions = document.createElement('div');
+                actions.classList.add('actions');
+
+                const likes = document.createElement('span');
+                likes.textContent = `${post.compteurlike} likes`;
+
+                actions.appendChild(likes);
+
+                // Assemblage de toutes les sections dans le postElement
+                postElement.appendChild(userInfo);
+                postElement.appendChild(content);
+                postElement.appendChild(actions);
+
+                // Ajout du post au conteneur
+                postsContainer.appendChild(postElement);
+            });
         })
-        .catch(error => console.log("Erreur :", error));
-    });
-}
-
-window.onload = function() {
-    // Récupère les données utilisateur depuis le localStorage
-    const userData = JSON.parse(localStorage.getItem('userData'));
-
-    if (userData) {
-        console.log("Utilisateur connecté:", userData); // Affiche les informations utilisateur
-        // Tu peux utiliser les données ici, par exemple afficher le nom d'utilisateur dans une balise HTML
-        document.getElementById('username').textContent = userData.username;
-    } 
-};
-
-
+        .catch(error => console.error('Erreur lors de la récupération des posts:', error));
 });
