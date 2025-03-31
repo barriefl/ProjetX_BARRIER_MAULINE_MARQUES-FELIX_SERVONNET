@@ -16,17 +16,19 @@ services:
     restart: always
 
   web:
-    image: php:7.4-apache  # Image PHP avec Apache
     container_name: php_apache_web
     volumes:
       - ./web:/var/www/html  # Montage des fichiers web
     ports:
-      - "8080:80"  # Exposer le port 80 pour l'application web
+      - "12500:80"  # Exposer le port 80 pour l'application web
     networks:
       - my_network
     depends_on:
       - db  # Le service web dépend de PostgreSQL
     restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
 
 networks:
   my_network:
