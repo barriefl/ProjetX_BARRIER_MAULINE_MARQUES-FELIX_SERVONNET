@@ -3,11 +3,11 @@
 /* Date de création :  28/03/2025 08:35:36                      */
 /*==============================================================*/
 
-drop table A_LIKE;
-drop table A_RETWEET;
-drop table COMMENTAIRE;
-drop table COMPTE;
-drop table POST;
+drop table if exists A_LIKE cascade;
+drop table if exists A_RETWEET cascade;
+drop table if exists COMMENTAIRE cascade;
+drop table if exists COMPTE cascade;
+drop table if exists POST cascade;
 
 
 
@@ -39,7 +39,7 @@ create table A_RETWEET (
 create table COMMENTAIRE (
    IDCOMMENTAIRE        SERIAL               not null,
    IDCOMPTE             INT4                 not null,
-   IDPOSTE              INT4                 not null,
+   IDPOSTE             INT4                 not null,
    TEXTE                VARCHAR(300)         null,
    DATECOMMENTAIRE      DATE                 null,
    constraint PK_COMMENTAIRE primary key (IDCOMMENTAIRE)
@@ -52,10 +52,10 @@ create table COMMENTAIRE (
 /*==============================================================*/
 create table COMPTE (
    IDCOMPTE             SERIAL               not null,
-   PSEUDO               VARCHAR(15)          null,
-   NOM                  VARCHAR(20)          null,
-   PRENOM               VARCHAR(20)          null,
-   MAIL                 VARCHAR(40)          null,
+   PSEUDO               VARCHAR(50)          null,
+   NOM                  VARCHAR(50)          null,
+   PRENOM               VARCHAR(50)          null,
+   MAIL                 VARCHAR(70)          null,
    DATENAISSANCE        DATE                 null,
    TELEPHONE            VARCHAR(10)          null,
    URLIMAGE             TEXT                 null,
@@ -74,7 +74,7 @@ create table POST (
    DESCRIPTION          VARCHAR(400)         null,
    URLIMAGE             TEXT                 null,
    COMPTEURLIKE         INT4                 null,
-   DATE			DATE		     null,
+   DATEPOST			DATE		     null,
    constraint PK_POST primary key (IDPOSTE)
 );
 
@@ -116,7 +116,7 @@ alter table POST
       on delete restrict on update restrict;
 
 ALTER TABLE POST
-	MODIFY COLUMN date DATE DEFAULT CURRENT_DATE;
+	alter COLUMN DATEPOST SET DEFAULT CURRENT_DATE;
 
 
 
@@ -131,14 +131,14 @@ INSERT INTO COMPTE (PSEUDO, NOM, PRENOM, MAIL, DATENAISSANCE, TELEPHONE, URLIMAG
 ('john_rainwater', 'Rainwater', 'John', 'john.rainwater@example.com', '1993-12-01', '0689012345', 'http://example.com/image8.jpg','Docker'),
 ('basile_valentin', 'Valentin', 'Basile', 'basile.valentin@example.com', '1991-04-20', '0690123456', 'http://example.com/image9.jpg','Docker'),
 ('adam_blade', 'Blade', 'Adam', 'adam.blade@example.com', '1987-08-30', '0612345679', 'http://example.com/image10.jpg','Docker'),
-('paracelse', 'Paracelse', 'Philippus Theophrastus Aureolus Bombast von Hohenheim', 'paracelse@example.com', '1493-11-11', '0623456780', 'http://example.com/image11.jpg','Docker'),
+('paracelse', 'Paracelse', 'Philippus', 'paracelse@example.com', '1493-11-11', '0623456780', 'http://example.com/image11.jpg','Docker'),
 ('ivan_aivazovski', 'Aivazovski', 'Ivan', 'ivan.aivazovski@example.com', '1817-07-29', '0634567891', 'http://example.com/image12.jpg','Docker'),
 ('le_greco', 'Greco', 'El', 'el.greco@example.com', '1541-10-01', '0645678902', 'http://example.com/image13.jpg','Docker'),
 ('alan_smithee', 'Smithee', 'Alan', 'alan.smithee2@example.com', '1975-08-15', '0656789013', 'http://example.com/image14.jpg','Docker'),
 ('arthur_besse', 'Besse', 'Arthur', 'arthur.besse2@example.com', '1982-11-22', '0667890124', 'http://example.com/image15.jpg','Docker'),
 ('franz_bibfeldt', 'Bibfeldt', 'Franz', 'franz.bibfeldt2@example.com', '1990-03-10', '0678901235', 'http://example.com/image16.jpg','Docker'),
 ('jean_baptiste_botul', 'Botul', 'Jean-Baptiste', 'jean-baptiste.botul2@example.com', '1985-06-30', '0689012346', 'http://example.com/image17.jpg','Docker'),
-('blanche_descartes', 'Descartes', 'Blanche', 'blanche.descartes2@example.com', '1992-07-25', '0690123457', 'http://example.com/image18.jpg','Docker');
+('blanche_descartes', 'Descartes', 'Blanche', 'blanche.descartes2@example.com', '1992-07-25', '0690123457', 'http://example.com/image18.jpg','Docker'),
 ('ptit_loup_blanc', 'Diard', 'Benoit', 'benoit.diart@gmail.com', '1992-07-25', '0620123457', 'https://yt3.googleusercontent.com/ytc/AIf8zZTxYl71_NKMyOWfsEa7HW67NkgmVR_39MeJRo3a=s900-c-k-c0x00ffffff-no-rj','Docker');
 
 
@@ -152,7 +152,7 @@ INSERT INTO POST (IDCOMPTE, DESCRIPTION, URLIMAGE, COMPTEURLIKE) VALUES
 
 
 
-INSERT INTO COMMENTAIRE (IDCOMPTE, IDPOST, TEXTE) VALUES
+INSERT INTO COMMENTAIRE (IDCOMPTE, IDPOSTE, TEXTE) VALUES
 (18,2,'Pourquoi vous donnez de la force a un detraqué comme lui'),
 (8,3,'Je pense tu fait 3 fois mon paf en vrai'),
 (1,5,'Merci tu gères'),
@@ -161,7 +161,7 @@ INSERT INTO COMMENTAIRE (IDCOMPTE, IDPOST, TEXTE) VALUES
 
 
 
-INSERT INTO A_LIKE (IDCOMPTE, IDPOST) VALUES 
+INSERT INTO A_LIKE (IDCOMPTE, IDPOSTE) VALUES 
 (3, 2), (12, 4), (1, 5), (18, 3), (7, 1), 
 (14, 2), (9, 4), (11, 5), (5, 3), (6, 1),
 (13, 2), (17, 4), (8, 5), (2, 3), (4, 1),
@@ -171,6 +171,6 @@ INSERT INTO A_LIKE (IDCOMPTE, IDPOST) VALUES
 
 
 
-INSERT INTO A_RETWEET (IDCOMPTE, IDPOST) VALUES 
+INSERT INTO A_RETWEET (IDCOMPTE, IDPOSTE) VALUES 
 (3, 2), (12, 4), (1, 5), (18, 3), (7, 1),
 (14, 2), (9, 4), (11, 5), (5, 3), (6, 1);

@@ -44,27 +44,48 @@ document.addEventListener("DOMContentLoaded", () => {
 // Gestion de la connexion
 const connexionForm = document.getElementById("connexionForm");
 
-    if (connexionForm) {
-        connexionForm.addEventListener("submit", (e) => {
-            e.preventDefault();
+if (connexionForm) {
+    connexionForm.addEventListener("submit", (e) => {
+        e.preventDefault();
 
-            const email = document.getElementById("connexionEmail").value;
-            const password = document.getElementById("connexionPassword").value;
+        const email = document.getElementById("connexionEmail").value;
+        console.log(email)
+        const password = document.getElementById("connexionPassword").value;
+        console.log(password)
+        // Récupérer l'attribut data dans le formulaire
+        const userData = {
+            email: email,
+            password: password
+        };
+        console.log(userData)
+        fetch("db.php", {  // Vérifie bien le chemin ici (selon ton projet)
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: `data=${encodeURIComponent(JSON.stringify(userData))}`
+        })
+        .then(response => response.json()) // Convertit la réponse en JSON
+        .then(data => {
+            alert(data.message); // Affiche le message du serveur
+            if (data.success) {
+                // Si la connexion réussie, envoie les informations du compte dans main.html via localStorage
+                localStorage.setItem('userData', JSON.stringify(data.user)); // Sauvegarder les infos dans le localStorage
+                window.location.href = "main.html"; // Redirige vers main.html
+            }
+        })
+        .catch(error => console.log("Erreur :", error));
+    });
+}
 
-            fetch("db.php", {  // Vérifie bien le chemin ici (selon ton projet)
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
-            })
-            .then(response => response.json()) // Convertit la réponse en JSON
-            .then(data => {
-                alert(data.message); // Affiche le message du serveur
-                if (data.success) {
-                    window.location.href = "main.html"; // Redirige vers main.html si succès
-                }
-            })
-            .catch(error => console.error("Erreur :", error));
-        });
-    }
+window.onload = function() {
+    // Récupère les données utilisateur depuis le localStorage
+    const userData = JSON.parse(localStorage.getItem('userData'));
+
+    if (userData) {
+        console.log("Utilisateur connecté:", userData); // Affiche les informations utilisateur
+        // Tu peux utiliser les données ici, par exemple afficher le nom d'utilisateur dans une balise HTML
+        document.getElementById('username').textContent = userData.username;
+    } 
+};
+
 
 });

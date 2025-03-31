@@ -9,7 +9,6 @@ header("Content-Type: application/json"); // On envoie une réponse JSON
 try {
     $pdo = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo ("Salut yannis");
 } catch (PDOException $e) { 
     echo json_encode(["success" => false, "message" => "Erreur BD : " . $e->getMessage()]);
     exit;
@@ -17,30 +16,33 @@ try {
 
 // Vérifier si la requête est bien une POST
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $email = $_POST["email"] ?? "";
-    $password = $_POST["password"] ?? "";
+    $inputData = json_decode($_POST["data"], true); // Récupère les données JSON envoyées
+
+    $email = $inputData["email"] ?? "alan.smithee@example.com";
+    $password = $inputData["password"] ?? "Docker";
 
     if (!empty($email) && !empty($password)) {
-        $stmt = $pdo->prepare("SELECT password FROM users WHERE email = ?");
+        $stmt = $pdo->prepare("SELECT IDCOMPTE, MAIL, PSEUDO, MDP FROM COMPTE WHERE MAIL = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($user && password_verify($password, $user["password"])) {
-            echo json_encode(["success" => true, "message" => "Connexion réussie"]);
+        if ($password == $user["mdp"]) {
+            // Si la connexion réussie, retourne les informations du compte
+            echo json_encode([
+                "success" => true,
+                "message" => "Connexion réussie",
+                "user" => [
+                    "id" => $user["IDCOMPTE"],
+                    "email" => $user["MAIL"],
+                    "username" => $user["PSEUDO"]
+                ]
+            ]);
         } else {
-            echo json_encode(["success" => false, "message" => "Identifiants incorrects"]);
+            echo json_encode(["success" => false, "message" => "Identifiants incorrects " . $user["mdp"] . " " . $password]);
         }
     } else {
         echo json_encode(["success" => false, "message" => "Veuillez remplir tous les champs."]);
     }
 }
 
-// Récupère les données des posts X.
-try {
-    $stmt = $pdo->query("SELECT * FROM POST");
-    $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    echo "Erreur lors de la récupération des posts : " . $e->getMessage();
-    exit;
-}
+
 ?>
