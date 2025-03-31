@@ -41,7 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
         // Gestion de la connexion
-    const connexionForm = document.getElementById("connexionForm");
+// Gestion de la connexion
+const connexionForm = document.getElementById("connexionForm");
 
     if (connexionForm) {
         connexionForm.addEventListener("submit", (e) => {
@@ -50,19 +51,19 @@ document.addEventListener("DOMContentLoaded", () => {
             const email = document.getElementById("connexionEmail").value;
             const password = document.getElementById("connexionPassword").value;
 
-            fetch("../db.php", {
+            fetch("db.php", {  // Vérifie bien le chemin ici (selon ton projet)
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: `action=connexion&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`,
+                body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
             })
-                .then((response) => response.text())
-                .then((data) => {
-                    alert(data); // Affiche la réponse du serveur (Succès ou erreur)
-                    if (data.includes("Connexion réussie")) {
-                        closeModal(modalConnexion); // Ferme la modale après connexion réussie
-                    }
-                })
-                .catch((error) => console.error("Erreur :", error));
+            .then(response => response.json()) // Convertit la réponse en JSON
+            .then(data => {
+                alert(data.message); // Affiche le message du serveur
+                if (data.success) {
+                    window.location.href = "main.html"; // Redirige vers main.html si succès
+                }
+            })
+            .catch(error => console.error("Erreur :", error));
         });
     }
 

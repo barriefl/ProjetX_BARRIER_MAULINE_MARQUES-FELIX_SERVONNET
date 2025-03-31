@@ -16,7 +16,6 @@ services:
     restart: always
 
   web:
-    image: php:7.4-apache  # Image PHP avec Apache
     container_name: php_apache_web
     volumes:
       - ./web:/var/www/html  # Montage des fichiers web
@@ -27,6 +26,9 @@ services:
     depends_on:
       - db  # Le service web dépend de PostgreSQL
     restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
 
 networks:
   my_network:
