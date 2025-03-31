@@ -39,11 +39,7 @@ create table A_RETWEET (
 create table COMMENTAIRE (
    IDCOMMENTAIRE        SERIAL               not null,
    IDCOMPTE             INT4                 not null,
-<<<<<<< HEAD
    IDPOST               INT4                 not null,
-=======
-   IDPOSTE             INT4                 not null,
->>>>>>> eeafc808c8e90134fd5904f803d8c36e705925c3
    TEXTE                VARCHAR(300)         null,
    DATECOMMENTAIRE      DATE                 null,
    constraint PK_COMMENTAIRE primary key (IDCOMMENTAIRE)
@@ -78,13 +74,8 @@ create table POST (
    DESCRIPTION          VARCHAR(400)         null,
    URLIMAGE             TEXT                 null,
    COMPTEURLIKE         INT4                 null,
-<<<<<<< HEAD
    DATEPOST			      DATE		            null,
    constraint PK_POST primary key (IDPOST)
-=======
-   DATEPOST			DATE		     null,
-   constraint PK_POST primary key (IDPOSTE)
->>>>>>> eeafc808c8e90134fd5904f803d8c36e705925c3
 );
 
 
@@ -125,11 +116,7 @@ alter table POST
       on delete restrict on update restrict;
 
 ALTER TABLE POST
-<<<<<<< HEAD
-	ALTER COLUMN datepost SET DEFAULT CURRENT_DATE;
-=======
-	alter COLUMN DATEPOST SET DEFAULT CURRENT_DATE;
->>>>>>> eeafc808c8e90134fd5904f803d8c36e705925c3
+	ALTER COLUMN DATEPOST SET DEFAULT CURRENT_DATE;
 
 
 
@@ -165,7 +152,7 @@ INSERT INTO POST (IDCOMPTE, DESCRIPTION, URLIMAGE, COMPTEURLIKE) VALUES
 
 
 
-INSERT INTO COMMENTAIRE (IDCOMPTE, IDPOSTE, TEXTE) VALUES
+INSERT INTO COMMENTAIRE (IDCOMPTE, IDPOST, TEXTE) VALUES
 (18,2,'Pourquoi vous donnez de la force a un detraqué comme lui'),
 (8,3,'Je pense tu fait 3 fois mon paf en vrai'),
 (1,5,'Merci tu gères'),
@@ -174,7 +161,7 @@ INSERT INTO COMMENTAIRE (IDCOMPTE, IDPOSTE, TEXTE) VALUES
 
 
 
-INSERT INTO A_LIKE (IDCOMPTE, IDPOSTE) VALUES 
+INSERT INTO A_LIKE (IDCOMPTE, IDPOST) VALUES 
 (3, 2), (12, 4), (1, 5), (18, 3), (7, 1), 
 (14, 2), (9, 4), (11, 5), (5, 3), (6, 1),
 (13, 2), (17, 4), (8, 5), (2, 3), (4, 1),
@@ -184,6 +171,6 @@ INSERT INTO A_LIKE (IDCOMPTE, IDPOSTE) VALUES
 
 
 
-INSERT INTO A_RETWEET (IDCOMPTE, IDPOSTE) VALUES 
+INSERT INTO A_RETWEET (IDCOMPTE, IDPOST) VALUES 
 (3, 2), (12, 4), (1, 5), (18, 3), (7, 1),
 (14, 2), (9, 4), (11, 5), (5, 3), (6, 1);
