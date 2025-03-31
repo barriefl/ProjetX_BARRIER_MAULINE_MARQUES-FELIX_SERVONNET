@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connexion X</title>
+    <link rel="stylesheet" href="style/index.css" />
+  </head>
+  <body>
+    <div class="logo">&Xopf;</div>
+    <div class="container">
+      <h1>Ça se passe maintenant</h1>
+      <p>Inscrivez-vous.</p>
+      <button href="#" class="btn btn-create">Créer un compte</button>
+      <p>Vous avez déjà un compte ?</p>
+      <button href="#" class="btn btn-login">Se connecter</button>
+    </div>
+
+    <div class="modal-inscription modal-container">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Créer un compte</h2>
+        <form id="inscriptionForm">
+          <label for="username">Nom d'utilisateur</label>
+          <input type="text" id="username" name="username" required />
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" name="password" required />
+          <button type="submit">S'inscrire</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-connexion modal-container">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Connexion</h2>
+        <form id="connectionForm">
+          <label for="email">Email</label>
+          <input type="email" id="connexionEmail" name="email" required />
+          <label for="password">Mot de passe</label>
+          <input
+            type="password"
+            id="connexionPassword"
+            name="password"
+            required
+          />
+          <button type="submit">Se connecter</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer">
+      <a href="#">À propos</a>
+      <a href="#">Téléchargez l’application X</a>
+      <a href="#">Conditions d’utilisation</a>
+      <a href="#">Politique de confidentialité</a>
+      <a href="#">Accessibilité</a>
+      <a href="#">Carrières</a>
+      <a href="#">Publicité</a>
+    </div>
+  </body>
+  <script defer src="js/main.js"></script>
+</html>
