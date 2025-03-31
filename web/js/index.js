@@ -51,7 +51,7 @@ const connexionForm = document.getElementById("connexionForm");
             const email = document.getElementById("connexionEmail").value;
             const password = document.getElementById("connexionPassword").value;
 
-            fetch("db.php", {  // Vérifie bien le chemin ici (selon ton projet)
+            fetch("back/db.php", {  // Vérifie bien le chemin ici (selon ton projet)
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
