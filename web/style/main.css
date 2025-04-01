@@ -185,9 +185,25 @@ body {
     color: #aaa;
 }
 
-.bi-heart {
+.bi-heart, .bi-chat, .bi-arrow-left-right {
     color: #fff;
     font-size: 20px;
+    margin-right: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.bi-heart:hover {
+    color: red;
+}
+
+.bi-heart-fill {
+    color: red;
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.bi-chat:hover {
+    color: blue;
 }
 
 .content {
@@ -339,50 +355,10 @@ body {
     margin-top: 10px;
 }
 
-.imgcomment{
-    width: 25px;
-    height: 25px;
-}
-
-.butcomment{
+.butcomment, .butlike, .butretweet {
     border: none;
-}
-
-.butlike {
-    background-color: #000;
-    border: none;
-}
-
-.imglike {
-    background-color: #FFF;
-    width: 25px;
-    height: 25px;
-}
-
-.imgliked {
-    background-color: #FFF;
-    border: none;
-    width: 25px;
-    height: 25px;
-}
-
-.butretweet{
-    background-color: #000;
-    border: none;
-}
-
-.imgretweet{
-    width: 25px;
-    height: 25px;
-    
-}
-
-.imgretweet#nonretweet{
-    stroke: white;
-}
-
-#estretweet{
-    stroke: blue;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 .divretweet{

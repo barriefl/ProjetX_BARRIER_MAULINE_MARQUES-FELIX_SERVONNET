@@ -112,14 +112,12 @@ document.addEventListener("DOMContentLoaded", () => {
                             // Incrémenter le compteur de likes
                             likes.textContent = parseInt(likes.textContent) + 1;
                             // Changer l'image du bouton de like
-                            imgLike.src = "../image/liked.svg"; // Remplacez par le chemin de votre image "liked"
-                            imgLike.classList.replace('imglike', 'imgliked');
+                            iconLike.classList.replace('bi-heart', 'bi-heart-fill'); // Remplacez par le chemin de votre image "liked"
                         } else {
                             // Incrémenter le compteur de likes
                             likes.textContent = parseInt(likes.textContent) - 1;
                             // Changer l'image du bouton de like
-                            imgLike.src = "../image/like.svg"; // Remplacez par le chemin de votre image "liked"
-                            imgLike.classList.replace('imgliked', 'imglike');
+                            iconLike.classList.replace('bi-heart-fill', 'bi-heart'); // Remplacez par le chemin de votre image "liked"
                         }
                     })
                     .catch(error => console.error("Erreur lors du like du post :", error));
@@ -131,12 +129,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 retweetsCount.textContent = `${post.compteurretweet}`;
                 const buttonRetweet = document.createElement('button');
                 buttonRetweet.classList += "butretweet"
-                const imgRetweet = document.createElement("img");
-                imgRetweet.classList += "imgretweet";
-                imgRetweet.id = "nonretweet";
-                imgRetweet.src = "./image/retweet.svg";
-                imgRetweet.style.stroke = "solid 2px blue"
-                buttonRetweet.appendChild(imgRetweet);
+                const iconRetweet = document.createElement("i");
+                iconRetweet.classList.add('bi', 'bi-arrow-left-right');
+                buttonRetweet.appendChild(iconRetweet);
                 divRetweet.appendChild(buttonRetweet)
                 divRetweet.appendChild(retweetsCount);
                 actions.appendChild(divRetweet);
@@ -158,9 +153,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         .then(data => {
                             if (data.success) {
                                 console.log("Retweet effectuée avec succès");
+                                iconRetweet.classList.add('retweet');
                             } else {
-                                imgRetweet.style.color ="blue"
                                 alert("Vous avez deja retweeté ce post")
+                                iconRetweet.classList.remove('retweet');
                             }
                         })
                         .catch(error => {
@@ -176,11 +172,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Bouton pour les commentaires avec une image
                 const buttonComment = document.createElement('button');
                 buttonComment.classList.add('butcomment');
-                const imgComment = document.createElement('img');
-                imgComment.classList.add('imgcomment');
-                imgComment.src = "../image/inverted_image.png"; // Remplacez par le chemin de votre image
-                imgComment.alt = "Comment";
-                buttonComment.appendChild(imgComment);
+                const iconComment = document.createElement('i');
+                iconComment.classList.add('bi', 'bi-chat');
+                buttonComment.appendChild(iconComment);
 
                 // Ajout de l'événement pour afficher/masquer les commentaires
                 const divComment = document.createElement('div');
