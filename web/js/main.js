@@ -2,11 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch('../back/fetch_posts.php')
         .then(response => response.json())
         .then(data => {
-            console.log(data);
+
+            // console.log(data);
             const postsContainer = document.querySelector('.posts-container');
-            console.log(postsContainer)
+            // console.log(postsContainer)
             data.forEach(post => {
-                console.log(post)
+                // console.log(post)
                 // Création de l'élément principal du post
                 const postElement = document.createElement('div');
                 postElement.classList.add('post');
