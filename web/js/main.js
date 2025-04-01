@@ -135,39 +135,85 @@ document.addEventListener("DOMContentLoaded", () => {
                 divRetweet.appendChild(buttonRetweet)
                 divRetweet.appendChild(retweetsCount);
                 actions.appendChild(divRetweet);
+                const divRT = document.createElement('div')
+
                 divRetweet.addEventListener("click", () => {
 
-                    if (userId){
-                        // Envoi de la requête fetch
-                        fetch('back/post_retweet.php', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({
-                                userId: userId,
-                                postId: post.idpost
+                    fetch('back/check_retweet.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            userId: userId,
+                            postId: post.idpost,
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            console.log("True")
+
+                            const input = document.createElement('input')
+                            input.classList="inputRT"
+                            const butconfirm = document.createElement('button')
+                            butconfirm.textContent="Confirmer"
+                            butconfirm.addEventListener("click", () => {
+                                const texte = input.value
+                                Retweet(post, texte)
+                                divRT.removeChild(input)
+                                divRT.removeChild(butconfirm)
                             })
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                console.log("Retweet effectuée avec succès");
-                                iconRetweet.classList.add('retweet');
-                            } else {
-                                alert("Vous avez deja retweeté ce post")
-                                iconRetweet.classList.remove('retweet');
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Erreur de communication avec le serveur : ', error);
-                        });
-                    }
-                    else {
-                        window.alert("Vous devez être connecté");
+                            divRT.appendChild(input)
+                            divRT.appendChild(butconfirm)
+                        } else {
+                            console.log("False")
+                            // Incrémenter le compteur de likes
+                            Retweet(post, null)
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erreur de communication avec le serveur : ', error);
+                    });
+                })
+                        
+
+                        function Retweet(post, texte){
+                           
+                            // Envoi de la requête fetch
+                            fetch('back/post_retweet.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                    userId: userId,
+                                    postId: post.idpost,
+                                    texte: texte
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    // Incrémenter le compteur de likes
+                                    console.log(1)
+                                    retweetsCount.textContent = parseInt(retweetsCount.textContent) + 1;
+                                } else {
+                                    // Incrémenter le compteur de likes
+                                    console.log(2)
+
+                                    retweetsCount.textContent = parseInt(retweetsCount.textContent) - 1;
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Erreur de communication avec le serveur : ', error);
+                            });
                     }
                     
-                })
+                    
+
+
+
 
                 // Bouton pour les commentaires avec une image
                 const buttonComment = document.createElement('button');
@@ -217,6 +263,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 postElement.appendChild(userInfo);
                 postElement.appendChild(content);
                 postElement.appendChild(actions);
+                postElement.appendChild(divRT);
                 postElement.appendChild(divComment);
 
                 // Ajout du post au conteneur

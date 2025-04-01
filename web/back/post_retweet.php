@@ -21,14 +21,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $userId = $data['userId'];
         $postId = $data['postId'];
+        $texte = $data['texte'];
 
-        try {
-            $stmt = $pdo->prepare("INSERT INTO A_RETWEET (IDCOMPTE, IDPOST) VALUES (?, ?)");
+        $stmt = $pdo->prepare("SELECT * FROM A_RETWEET WHERE IDCOMPTE = ? AND IDPOST = ?");
+        $stmt->execute([$userId, $postId]);
+        $retweet = $stmt->fetch();
+    
+        if ($retweet) {
+            // Supprimer un like
+            $stmt = $pdo->prepare("DELETE FROM A_RETWEET WHERE (IDCOMPTE = ? AND IDPOST = ?)");
             $stmt->execute([$userId, $postId]);
-
-            echo json_encode(["success" => true, "message" => "Retweet ajouté avec succès"]);
-        } catch (PDOException $e) {
-            echo json_encode(["success" => false, "message" => "Erreur lors de l'insertion dans la base de données : " . $e->getMessage()]);
+    
+            // Décrementer le compteur de likes
+            $stmt = $pdo->prepare("UPDATE POST SET COMPTEURRETWEET = COMPTEURRETWEET - 1 WHERE IDPOST = ?");
+            $stmt->execute([$postId]);
+    
+            echo json_encode(["success" => false, "message" => "Retweet supprimé"]);
+        } else {
+            // Ajouter un like
+            $stmt = $pdo->prepare("INSERT INTO A_RETWEET (IDCOMPTE, IDPOST, DESCRIPTION) VALUES (?, ?, ?)");
+            $stmt->execute([$userId, $postId,$texte]);
+    
+            // Incrémenter le compteur de likes
+            $stmt = $pdo->prepare("UPDATE POST SET COMPTEURRETWEET = COMPTEURRETWEET + 1 WHERE IDPOST = ?");
+            $stmt->execute([$postId]);
+    
+            echo json_encode(["success" => true, "message" => "Post retweeté"]);
         }
     } else {
         echo json_encode(["success" => false, "message" => "Données manquantes : userId ou postId"]);

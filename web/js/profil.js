@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
             description.textContent = item.description;
 
             const postImage = document.createElement('img');
-            image.classList.add('post-image');
+            postImage.classList.add('post-image');
             postImage.src = item.urlimage;
             postImage.alt = "Post Image";
 
