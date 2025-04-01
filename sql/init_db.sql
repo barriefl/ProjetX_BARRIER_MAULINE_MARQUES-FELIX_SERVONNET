@@ -28,7 +28,7 @@ create table A_LIKE (
 create table A_RETWEET (
    IDCOMPTE             INT4                 not null,
    IDPOST               INT4                 not null,
-   DESCRIPTION          VARCHAR(400)         null,
+   DESCRIPTIONRT          VARCHAR(400)         null,
    constraint PK_A_RETWEET primary key (IDCOMPTE, IDPOST)
 );
 
@@ -171,6 +171,6 @@ INSERT INTO A_LIKE (IDCOMPTE, IDPOST) VALUES
 
 
 
-INSERT INTO A_RETWEET (IDCOMPTE, IDPOST, DESCRIPTION) VALUES 
+INSERT INTO A_RETWEET (IDCOMPTE, IDPOST, DESCRIPTIONRT) VALUES 
 (1, 5, "Le football il a changé"),
 (19, 3, "Mac c'est vraiment mieux que Windows");

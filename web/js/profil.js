@@ -136,6 +136,9 @@ document.addEventListener("DOMContentLoaded", () => {
             author.textContent = `Auteur: ${item.pseudo}`;
             itemDiv.appendChild(author);
 
+            const descriptionrt = document.createElement("p");
+            descriptionrt.textContent = item.descriptionrt;
+            itemDiv.appendChild(descriptionrt);
             
             const description = document.createElement("p");
             description.textContent = item.description;

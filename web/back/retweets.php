@@ -21,7 +21,7 @@ $userId = isset($input['userId']) ? $input['userId'] : null;
 
 if (!empty($userId)) {
     // Récupérer les retweets de l'utilisateur
-    $stmt = $pdo->prepare("SELECT p.IDPOST, p.DESCRIPTION, p.URLIMAGE, c.PSEUDO, c.URLIMAGECOMPTE 
+    $stmt = $pdo->prepare("SELECT p.IDPOST, p.DESCRIPTION, p.URLIMAGE, c.PSEUDO, c.URLIMAGECOMPTE , a.DESCRIPTIONRT
                             FROM A_RETWEET a
                             JOIN POST p ON p.IDPOST = a.IDPOST
                             JOIN COMPTE c ON c.IDCOMPTE = p.IDCOMPTE

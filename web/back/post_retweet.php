@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             echo json_encode(["success" => false, "message" => "Retweet supprimé"]);
         } else {
             // Ajouter un like
-            $stmt = $pdo->prepare("INSERT INTO A_RETWEET (IDCOMPTE, IDPOST, DESCRIPTION) VALUES (?, ?, ?)");
+            $stmt = $pdo->prepare("INSERT INTO A_RETWEET (IDCOMPTE, IDPOST, DESCRIPTIONRT) VALUES (?, ?, ?)");
             $stmt->execute([$userId, $postId,$texte]);
     
             // Incrémenter le compteur de likes
