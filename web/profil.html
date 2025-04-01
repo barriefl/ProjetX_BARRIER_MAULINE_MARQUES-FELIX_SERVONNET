@@ -16,8 +16,8 @@
     <div class="left-sidebar">
       <div class="logo"><a href="/main.html">Projet &Xopf;</a></div>
       <ul class="menu">
-        <li>
-          <a href="/main.html"
+        <li id="home">
+          <a href="#"
             ><span class="icon"><i class="bi bi-house"></i></span> Accueil</a
           >
         </li>
@@ -91,7 +91,8 @@
             <div class="header">
                 <a href="main.html"><span class="icon"><i class="bi bi-arrow-left"></i></span></a>
                 <div class="header-user">
-                    <span id="username">XeroZ</span>
+                    <img src="" class="avatar"></span>
+                    <span id="username"></span>
                     <span id="nbPost">4 posts</span>
                 </div>
             </div>
@@ -102,11 +103,13 @@
             </div>
             
             <div class="tab-menu">
-                <button href="#" class="active">Posts</button>
-                <button href="#">Retweets</button>
-                <button href="#">Commentaires</button>
-                <button href="#">J'aime</button>
-            </div>
+              <button class="active" id="postsBtn">Posts</button>
+              <button id="retweetsBtn">Retweets</button>
+              <button id="commentsBtn">Commentaires</button>
+              <button id="likesBtn">J'aime</button>
+          </div>
+          
+          <div id="content"></div>
         </div>
 
     </div>

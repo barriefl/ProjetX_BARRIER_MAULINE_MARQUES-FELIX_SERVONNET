@@ -229,6 +229,7 @@ body {
     margin-top: 10px;
     font-size: 14px;
     color: #aaa;
+    align-items: center;
 }
 
 .tab-menu {
@@ -340,4 +341,49 @@ body {
 
 .butcomment{
     border: none;
+}
+
+.butlike {
+    background-color: #000;
+    border: none;
+}
+
+.imglike {
+    background-color: #FFF;
+    width: 25px;
+    height: 25px;
+}
+
+.imgliked {
+    background-color: #FFF;
+    border: none;
+    width: 25px;
+    height: 25px;
+}
+
+
+
+.butretweet{
+    background-color: #000;
+    border: none;
+}
+
+.imgretweet{
+    width: 25px;
+    height: 25px;
+    
+}
+
+.imgretweet#nonretweet{
+    stroke: white;
+}
+
+#estretweet{
+    stroke: blue;
+}
+
+.divretweet{
+    display: flex;
+    height: 20px;
+    width: 20px;
 }

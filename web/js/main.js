@@ -22,17 +22,19 @@ if (userId) {
             }
         })
         .catch(error => console.error("Erreur :", error));
+
+    const butprofil = document.getElementById('butprofil') 
+    butprofil.addEventListener("click", () => {
+        window.location.href = `profil.html?id=${userId}`;
+    })
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     fetch('../back/fetch_posts.php')
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             const postsContainer = document.querySelector('.posts-container');
-            console.log(postsContainer)
             data.forEach(post => {
-                console.log(post)
                 // Création de l'élément principal du post
                 const postElement = document.createElement('div');
                 postElement.classList.add('post');
@@ -49,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const username = document.createElement('span');
                 username.classList.add('username');
-                username.textContent = `${post.nom}`;
+                username.textContent = `${post.pseudo}`;
 
                 const likesCount = document.createElement('span');
                 likesCount.style.color = "#aaa";
@@ -79,72 +81,156 @@ document.addEventListener("DOMContentLoaded", () => {
                 const actions = document.createElement('div');
                 actions.classList.add('actions');
 
+                // Div contenant le bouton de like et le compteur de likes
+                const likeContainer = document.createElement('div');
+                likeContainer.classList.add('like-container');
+
+                const buttonLike = document.createElement('button');
+                buttonLike.classList.add('butlike');
+                const imgLike = document.createElement('img');
+                imgLike.classList.add('imglike');
+                imgLike.src = "../image/like.svg";
+                imgLike.alt = "Like";
+                buttonLike.appendChild(imgLike);
+
                 const likes = document.createElement('span');
-                likes.textContent = `${post.compteurlike} likes`;
+                likes.textContent = `${post.compteurlike}`;
 
-                const divcomment = document.createElement('div')
-                divcomment.id = "comment" + post.idpost
-                
+                likeContainer.appendChild(buttonLike);
+                likeContainer.appendChild(likes);
 
-                const buttonLike = document.createElement('button')
-                buttonLike.classList="butlike"
-                const imglike = document.createElement('img')
-                imglike.classList = "imglike"
+                // Ajouter un événement pour gérer le clic sur le bouton like
+                buttonLike.addEventListener("click", () => {
+                    fetch('../back/like_post.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: `post_id=${post.idpost}&user_id=${userId}` 
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Incrémenter le compteur de likes
+                            likes.textContent = parseInt(likes.textContent) + 1;
+                            // Changer l'image du bouton de like
+                            imgLike.src = "../image/liked.svg"; // Remplacez par le chemin de votre image "liked"
+                            imgLike.classList.replace('imglike', 'imgliked');
+                        } else {
+                            // Incrémenter le compteur de likes
+                            likes.textContent = parseInt(likes.textContent) - 1;
+                            // Changer l'image du bouton de like
+                            imgLike.src = "../image/like.svg"; // Remplacez par le chemin de votre image "liked"
+                            imgLike.classList.replace('imgliked', 'imglike');
+                        }
+                    })
+                    .catch(error => console.error("Erreur lors du like du post :", error));
+                });
+
+                const divRetweet = document.createElement("div");
+                divRetweet.classList.add("divretweet");
+                const retweetsCount = document.createElement('span');
+                retweetsCount.textContent = `${post.compteurretweet}`;
+                const buttonRetweet = document.createElement('button');
+                buttonRetweet.classList += "butretweet"
+                const imgRetweet = document.createElement("img");
+                imgRetweet.classList += "imgretweet";
+                imgRetweet.id = "nonretweet";
+                imgRetweet.src = "./image/retweet.svg";
+                imgRetweet.style.stroke = "solid 2px blue"
+                buttonRetweet.appendChild(imgRetweet);
+                divRetweet.appendChild(buttonRetweet)
+                divRetweet.appendChild(retweetsCount);
+                actions.appendChild(divRetweet);
+                divRetweet.addEventListener("click", () => {
+
+                    if (userId){
+                        
 
 
-                const buttoncomment = document.createElement('button')
-                buttoncomment.classList="butcomment"
-                const imgcommment = document.createElement('img')
-                imgcommment.classList = "imgcomment"
-                imgcommment.src = "./image/inverted_image.png"
-                buttoncomment.appendChild(imgcommment)
-                buttoncomment.addEventListener("click", () => {
-         
-                    const div = document.getElementById('comment' + post.idpost); // Trouver la div des commentaires
+
+
+                        // Envoi de la requête fetch
+                        fetch('back/post_retweet.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                userId: userId,
+                                postId: post.idpost
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                console.log("Retweet effectuée avec succès");
+                            } else {
+                                imgRetweet.style.color ="blue"
+                                alert("Vous avez deja retweeté ce post")
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Erreur de communication avec le serveur : ', error);
+                        });
+                    }
+                    else {
+                        window.alert("Vous devez être connecté");
+                    }
                     
-                    // Si la div n'est pas vide, cela signifie que les commentaires sont déjà affichés, donc on les vide
-                    if (div.innerHTML !== "") {
-                        div.innerHTML = ""; // Enlever les commentaires
+                })
+
+                // Bouton pour les commentaires avec une image
+                const buttonComment = document.createElement('button');
+                buttonComment.classList.add('butcomment');
+                const imgComment = document.createElement('img');
+                imgComment.classList.add('imgcomment');
+                imgComment.src = "../image/inverted_image.png"; // Remplacez par le chemin de votre image
+                imgComment.alt = "Comment";
+                buttonComment.appendChild(imgComment);
+
+                // Ajout de l'événement pour afficher/masquer les commentaires
+                const divComment = document.createElement('div');
+                divComment.id = "comment" + post.idpost;
+
+                buttonComment.addEventListener("click", () => {
+                    if (divComment.innerHTML !== "") {
+                        divComment.innerHTML = ""; // Enlever les commentaires
                     } else {
-                        // Sinon, on récupère les commentaires
                         fetch(`../back/fetch_comment.php?idpost=${post.idpost}`)
                             .then(response => response.json())
                             .then(data => {
-                                // Vider la div pour éviter les doublons
-                                div.innerHTML = "";
-
-                                console.log(data)
-                
+                                divComment.innerHTML = "";
                                 data.forEach(comment => {
 
                                     console.log(comment);
 
                                     const commentDiv = document.createElement("div");
                                     commentDiv.classList.add("comment");
-                
+
                                     const pseudo = document.createElement("strong");
                                     pseudo.textContent = comment.pseudo + " : ";
-                
+
                                     const texte = document.createElement("span");
                                     texte.textContent = comment.texte;
-                
+
                                     commentDiv.appendChild(pseudo);
                                     commentDiv.appendChild(texte);
-                                    div.appendChild(commentDiv);
+                                    divComment.appendChild(commentDiv);
                                 });
                             })
                             .catch(error => console.error("Erreur lors du fetch des commentaires :", error));
                     }
                 });
-                
-                actions.appendChild(likes);
-                actions.appendChild(buttoncomment);
+
+                actions.appendChild(likeContainer);
+                actions.appendChild(buttonComment);
 
                 // Assemblage de toutes les sections dans le postElement
                 postElement.appendChild(userInfo);
                 postElement.appendChild(content);
                 postElement.appendChild(actions);
-                postElement.appendChild(divcomment);
+                postElement.appendChild(divComment);
 
                 // Ajout du post au conteneur
                 postsContainer.appendChild(postElement);
