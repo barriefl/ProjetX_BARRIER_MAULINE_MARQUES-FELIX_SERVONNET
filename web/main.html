@@ -14,10 +14,10 @@
   </head>
   <body>
     <div class="left-sidebar">
-      <div class="logo"><a href="/front/main.html">Projet &Xopf;</a></div>
+      <div class="logo"><a href="/main.html">Projet &Xopf;</a></div>
       <ul class="menu">
         <li>
-          <a href="/front/main.html"
+          <a href="/main.html"
             ><span class="icon"><i class="bi bi-house"></i></span> Accueil</a
           >
         </li>
@@ -78,13 +78,12 @@
       </ul>
       <button class="post-button big-post-button">Poster</button>
       <div class="user-info">
-        <img class="avatar" src=""></img>
-        <span id="username"></span>
+        <span class="avatar"></span>
+        <span class="username"></span>
         <span class="more-info"><i class="bi bi-three-dots"></i></span>
       </div>
     </div>
     <div class="container container-border">
-      <!--  s -->
       <div class="tab-menu">
         <a href="#" class="active">Pour vous</a>
         <a href="#">Abonnements</a>
@@ -92,32 +91,22 @@
 
       <!-- Header -->
       <div class="header">
+        <div class="header-tweet">
+          <img src="" alt="" class="avatar"/>
+          <input type="text" placeholder="Quoi de neuf ?" />
+        </div>
+        <div class="header-buttons">
+          <label class="image-label" for="image-input"><i class="bi bi-image"></i></label>
+          <input class="image-input" type="file" accept="image/*" id="image-input"></input>
+          <button class="post-button">Poster</button>
+        </div>
         <img src="" alt="empty.png" class="avatar"/>
         <input type="text" placeholder="Quoi de neuf ?" />
         <button class="post-button">Poster</button>
       </div>
 
       <!-- Post -->
-      <div class="posts-container">
-        <div class="post">
-          <div class="tweet-user-info">
-            <div>
-              <span class="username">Elon Musk</span>
-              <span style="color: #aaa">@elonmusk · 26 mars</span>
-            </div>
-          </div>
-          <div class="content">
-            <p>Le média n'a pas pu être lu.</p>
-            <button class="button-blue">Recharger</button>
-          </div>
-          <div class="actions">
-            <span>3 k</span>
-            <span>8 k</span>
-            <span>55 k</span>
-            <span>38 M</span>
-          </div>
-        </div>
-      </div>
+      <div class="posts-container"></div>
     </div>
     <div class="right-sidebar">
       <!-- Barre de recherche -->
@@ -126,7 +115,7 @@
         <input type="text" placeholder="Chercher" />
       </div>
 
-      <!-- Section Premium -->
+      <!-- Section Premium
       <div class="card">
         <h3>Abonnez-vous à Premium</h3>
         <p>
@@ -134,37 +123,22 @@
           une part des revenus si vous respectez les critères.
         </p>
         <button class="button-blue">Souscrire</button>
-      </div>
+      </div> -->
 
-      <!-- Suggestions -->
+      <!-- Suggestions
       <div class="card">
         <h3>Suggestions</h3>
         <div class="suggestion">
-          <img src="https://via.placeholder.com/40" alt="Avatar" />
-          <div class="info">
-            <span class="username">Mohammed Aigoin</span>
-            <span class="handle">@Mohammed_Aigoin</span>
-          </div>
           <button class="follow-button">Suivre</button>
         </div>
         <div class="suggestion">
-          <img src="https://via.placeholder.com/40" alt="Avatar" />
-          <div class="info">
-            <span class="username">Julien Chièze</span>
-            <span class="handle">@JulienChieze</span>
-          </div>
           <button class="follow-button">Suivre</button>
         </div>
         <div class="suggestion">
-          <img src="https://via.placeholder.com/40" alt="Avatar" />
-          <div class="info">
-            <span class="username">JUJUTSU KAISEN EN</span>
-            <span class="handle">@Jujutsu_Kaisen_</span>
-          </div>
           <button class="follow-button">Suivre</button>
         </div>
         <button class="button-blue">Voir plus</button>
-      </div>
+      </div> -->
 
       <!-- Tendances -->
       <div class="card">
