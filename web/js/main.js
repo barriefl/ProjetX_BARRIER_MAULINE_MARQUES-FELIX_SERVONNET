@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
             data.forEach(post => {
                 // Création de l'élément principal du post
                 const postElement = document.createElement('div');
-                postElement.classList.add('post');
+                postElement.classList.add('content');
 
                 // Création de la section user-info
                 const userInfo = document.createElement('div');
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // Création de la section content
                 const content = document.createElement('div');
-                content.classList.add('content');
+                content.classList.add('item');
 
                 const description = document.createElement('p');
                 description.textContent = post.description;
@@ -87,11 +87,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const buttonLike = document.createElement('button');
                 buttonLike.classList.add('butlike');
-                const imgLike = document.createElement('img');
-                imgLike.classList.add('imglike');
-                imgLike.src = "../image/like.svg";
-                imgLike.alt = "Like";
-                buttonLike.appendChild(imgLike);
+                const iconLike = document.createElement('i');
+                iconLike.classList.add('bi', 'bi-heart');
+                buttonLike.appendChild(iconLike);
 
                 const likes = document.createElement('span');
                 likes.textContent = `${post.compteurlike}`;
@@ -145,11 +143,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 divRetweet.addEventListener("click", () => {
 
                     if (userId){
-                        
-
-
-
-
                         // Envoi de la requête fetch
                         fetch('back/post_retweet.php', {
                             method: 'POST',

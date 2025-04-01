@@ -101,6 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
         activeButton.classList.add("active");
     }
 
+    // Fonction pour afficher les posts
     function displayPosts(data, contentDiv) {
         data.forEach(item => {
             const itemDiv = document.createElement("div");
@@ -111,6 +112,8 @@ document.addEventListener("DOMContentLoaded", () => {
             itemDiv.appendChild(title);
 
             const image = document.createElement("img");
+            image.classList.add('post-image');
+            image.alt = "Post Image";
             image.src = item.urlimage;
             itemDiv.appendChild(image);
 
@@ -139,6 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
             itemDiv.appendChild(description);
 
             const image = document.createElement("img");
+            image.classList.add('post-image');
             image.src = item.urlimage;
             itemDiv.appendChild(image);
 
@@ -169,6 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
             itemDiv.appendChild(title);
 
             const image = document.createElement("img");
+            image.classList.add('post-image');
             image.src = item.urlimage;
             itemDiv.appendChild(image);
             
@@ -209,6 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
             description.textContent = item.description;
 
             const postImage = document.createElement('img');
+            image.classList.add('post-image');
             postImage.src = item.urlimage;
             postImage.alt = "Post Image";
 

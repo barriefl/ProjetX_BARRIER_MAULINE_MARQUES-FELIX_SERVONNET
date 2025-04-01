@@ -185,35 +185,40 @@ body {
     color: #aaa;
 }
 
-.post {
+.bi-heart {
+    color: #fff;
+    font-size: 20px;
+}
+
+.content {
     padding: 15px;
     border-bottom: 1px solid #333;
 }
 
-.post .user-info {
+.content .user-info {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
 }
 
-.post .user-info img {
+.content .user-info img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     margin-right: 10px;
 }
 
-.post .user-info .username {
+.content .user-info .username {
     font-weight: bold;
 }
 
-.post .content {
+.content .item {
     border-radius: 10px;
     padding: 20px;
     text-align: center;
 }
 
-.post .content button {
+.content .item button {
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -223,7 +228,7 @@ body {
     cursor: pointer;
 }
 
-.post .actions {
+.content .actions {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
@@ -360,8 +365,6 @@ body {
     width: 25px;
     height: 25px;
 }
-
-
 
 .butretweet{
     background-color: #000;
