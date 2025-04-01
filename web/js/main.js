@@ -72,6 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const postImage = document.createElement('img');
                 postImage.src = post.urlimage;
                 postImage.alt = "Post Image";
+                postImage.classList.add('post-image');
 
                 content.appendChild(description);
                 content.appendChild(postImage);
@@ -125,6 +126,59 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .catch(error => console.error("Erreur lors du like du post :", error));
                 });
+
+                const divRetweet = document.createElement("div");
+                divRetweet.classList.add("divretweet");
+                const retweetsCount = document.createElement('span');
+                retweetsCount.textContent = `${post.compteurretweet}`;
+                const buttonRetweet = document.createElement('button');
+                buttonRetweet.classList += "butretweet"
+                const imgRetweet = document.createElement("img");
+                imgRetweet.classList += "imgretweet";
+                imgRetweet.id = "nonretweet";
+                imgRetweet.src = "./image/retweet.svg";
+                imgRetweet.style.stroke = "solid 2px blue"
+                buttonRetweet.appendChild(imgRetweet);
+                divRetweet.appendChild(buttonRetweet)
+                divRetweet.appendChild(retweetsCount);
+                actions.appendChild(divRetweet);
+                divRetweet.addEventListener("click", () => {
+
+                    if (userId){
+                        
+
+
+
+
+                        // Envoi de la requête fetch
+                        fetch('back/post_retweet.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                userId: userId,
+                                postId: post.idpost
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                console.log("Retweet effectuée avec succès");
+                            } else {
+                                imgRetweet.style.color ="blue"
+                                alert("Vous avez deja retweeté ce post")
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Erreur de communication avec le serveur : ', error);
+                        });
+                    }
+                    else {
+                        window.alert("Vous devez être connecté");
+                    }
+                    
+                })
 
                 // Bouton pour les commentaires avec une image
                 const buttonComment = document.createElement('button');
