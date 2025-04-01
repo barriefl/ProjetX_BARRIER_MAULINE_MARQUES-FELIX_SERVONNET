@@ -22,6 +22,11 @@ if (userId) {
             }
         })
         .catch(error => console.error("Erreur :", error));
+
+    const butprofil = document.getElementById('butprofil') 
+    butprofil.addEventListener("click", () => {
+        window.location.href = `profil.html?id=${userId}`;
+    })
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -49,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const username = document.createElement('span');
                 username.classList.add('username');
-                username.textContent = `${post.nom}`;
+                username.textContent = `${post.pseudo}`;
 
                 const likesCount = document.createElement('span');
                 likesCount.style.color = "#aaa";
