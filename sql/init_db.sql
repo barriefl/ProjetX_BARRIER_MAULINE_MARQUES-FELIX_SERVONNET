@@ -52,7 +52,7 @@ create table COMMENTAIRE (
 /*==============================================================*/
 create table COMPTE (
    IDCOMPTE             SERIAL               not null,
-   PSEUDO               VARCHAR(50)          null,
+   PSEUDO               VARCHAR(50)          not null UNIQUE,
    NOM                  VARCHAR(50)          null,
    PRENOM               VARCHAR(50)          null,
    MAIL                 VARCHAR(70)          null,
@@ -124,22 +124,23 @@ INSERT INTO COMPTE (PSEUDO, NOM, PRENOM, MAIL, DATENAISSANCE, TELEPHONE, URLIMAG
 ('alan_smithee', 'Smithee', 'Alan', 'alan.smithee@example.com', '1975-08-15', '0612345678', 'https://media.licdn.com/dms/image/v2/D4E03AQGpEqqMLKPi5g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1729075132234?e=2147483647&v=beta&t=XZONS51nO--_1mh4ngDroIDwFZAwgJTL8EG4axBDnQg','Docker'),
 ('arthur_besse', 'Besse', 'Arthur', 'arthur.besse@example.com', '1982-11-22', '0623456789', 'http://example.com/image2.jpg','Docker'),
 ('franz_bibfeldt', 'Bibfeldt', 'Franz', 'franz.bibfeldt@example.com', '1990-03-10', '0634567890', 'http://example.com/image3.jpg','Docker'),
-('jean_baptiste_botul', 'Botul', 'Jean-Baptiste', 'jean-baptiste.botul@example.com', '1985-06-30', '0645678901', 'http://example.com/image4.jpg','Docker'),
-('blanche_descartes', 'Descartes', 'Blanche', 'blanche.descartes@example.com', '1992-07-25', '0656789012', 'http://example.com/image5.jpg','Docker'),
-('nicolas_bourbaki', 'Bourbaki', 'Nicolas', 'nicolas.bourbaki@example.com', '1988-09-15', '0667890123', 'http://example.com/image6.jpg','Docker'),
-('g_w_peck', 'Peck', 'G.W.', 'gw.peck@example.com', '1980-01-05', '0678901234', 'http://example.com/image7.jpg','Docker'),
-('john_rainwater', 'Rainwater', 'John', 'john.rainwater@example.com', '1993-12-01', '0689012345', 'http://example.com/image8.jpg','Docker'),
-('basile_valentin', 'Valentin', 'Basile', 'basile.valentin@example.com', '1991-04-20', '0690123456', 'http://example.com/image9.jpg','Docker'),
+('jean_botul', 'Botul', 'Jean', 'jean.botul@example.com', '1985-06-30', '0645678901', 'http://example.com/image4.jpg','Docker'),
+('blanche_dumas', 'Dumas', 'Blanche', 'blanche.dumas@example.com', '1992-07-25', '0656789012', 'http://example.com/image5.jpg','Docker'),
+('nicolas_renard', 'Renard', 'Nicolas', 'nicolas.renard@example.com', '1988-09-15', '0667890123', 'http://example.com/image6.jpg','Docker'),
+('g_peck', 'Peck', 'Georges', 'georges.peck@example.com', '1980-01-05', '0678901234', 'http://example.com/image7.jpg','Docker'),
+('john_doe', 'Doe', 'John', 'john.doe@example.com', '1993-12-01', '0689012345', 'http://example.com/image8.jpg','Docker'),
+('basile_dupond', 'Dupond', 'Basile', 'basile.dupond@example.com', '1991-04-20', '0690123456', 'http://example.com/image9.jpg','Docker'),
 ('adam_blade', 'Blade', 'Adam', 'adam.blade@example.com', '1987-08-30', '0612345679', 'http://example.com/image10.jpg','Docker'),
-('paracelse', 'Paracelse', 'Philippus', 'paracelse@example.com', '1493-11-11', '0623456780', 'http://example.com/image11.jpg','Docker'),
-('ivan_aivazovski', 'Aivazovski', 'Ivan', 'ivan.aivazovski@example.com', '1817-07-29', '0634567891', 'http://example.com/image12.jpg','Docker'),
-('le_greco', 'Greco', 'El', 'el.greco@example.com', '1541-10-01', '0645678902', 'http://example.com/image13.jpg','Docker'),
-('alan_smithee', 'Smithee', 'Alan', 'alan.smithee2@example.com', '1975-08-15', '0656789013', 'http://example.com/image14.jpg','Docker'),
-('arthur_besse', 'Besse', 'Arthur', 'arthur.besse2@example.com', '1982-11-22', '0667890124', 'http://example.com/image15.jpg','Docker'),
-('franz_bibfeldt', 'Bibfeldt', 'Franz', 'franz.bibfeldt2@example.com', '1990-03-10', '0678901235', 'http://example.com/image16.jpg','Docker'),
-('jean_baptiste_botul', 'Botul', 'Jean-Baptiste', 'jean-baptiste.botul2@example.com', '1985-06-30', '0689012346', 'http://example.com/image17.jpg','Docker'),
-('blanche_descartes', 'Descartes', 'Blanche', 'blanche.descartes2@example.com', '1992-07-25', '0690123457', 'http://example.com/image18.jpg','Docker'),
-('ptit_loup_blanc', 'Diard', 'Benoit', 'benoit.diard@gmail.com', '1992-07-25', '0620123457', 'https://yt3.googleusercontent.com/ytc/AIf8zZTxYl71_NKMyOWfsEa7HW67NkgmVR_39MeJRo3a=s900-c-k-c0x00ffffff-no-rj','Docker');
+('paracelse_2', 'Paracelse', 'Philippe', 'philippe.paracelse@example.com', '1493-11-11', '0623456780', 'http://example.com/image11.jpg','Docker'),
+('ivan_petrov', 'Petrov', 'Ivan', 'ivan.petrov@example.com', '1817-07-29', '0634567891', 'http://example.com/image12.jpg','Docker'),
+('el_garcia', 'Garcia', 'Elena', 'elena.garcia@example.com', '1541-10-01', '0645678902', 'http://example.com/image13.jpg','Docker'),
+('alan_walker', 'Walker', 'Alan', 'alan.walker@example.com', '1975-08-15', '0656789013', 'http://example.com/image14.jpg','Docker'),
+('arthur_levy', 'Levy', 'Arthur', 'arthur.levy@example.com', '1982-11-22', '0667890124', 'http://example.com/image15.jpg','Docker'),
+('franz_meier', 'Meier', 'Franz', 'franz.meier@example.com', '1990-03-10', '0678901235', 'http://example.com/image16.jpg','Docker'),
+('jean_durand', 'Durand', 'Jean', 'jean.durand@example.com', '1985-06-30', '0689012346', 'http://example.com/image17.jpg','Docker'),
+('blanche_martin', 'Martin', 'Blanche', 'blanche.martin@example.com', '1992-07-25', '0690123457', 'http://example.com/image18.jpg','Docker'),
+('ptit_loup_blanc', 'Diard', 'Benoit', 'benoit.diard@example.com', '1992-07-25', '0620123457', 'https://yt3.googleusercontent.com/ytc/AIf8zZTxYl71_NKMyOWfsEa7HW67NkgmVR_39MeJRo3a=s900-c-k-c0x00ffffff-no-rj','Docker');
+
 
 
 INSERT INTO POST (IDCOMPTE, DESCRIPTION, URLIMAGE, COMPTEURLIKE) VALUES

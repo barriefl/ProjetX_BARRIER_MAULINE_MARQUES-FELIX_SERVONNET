@@ -27,11 +27,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!empty($nom) && !empty($prenom) && !empty($pseudo) && !empty($email) && !empty($password)) {
 
         try {
-            $stmt = $pdo->prepare("INSERT INTO COMPTE (NOM, PRENOM, PSEUDO, MAIL, MDP, URLIMAGECOMPTE) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$nom, $prenom, $pseudo, $email, $password, $url]);
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            $user_id = $result['idcompte'];
-            echo json_encode(["success" => true, "message" => "Compte créé avec succès", "user_id" => $user_id]);
+            $stmtinsert = $pdo->prepare("INSERT INTO COMPTE (NOM, PRENOM, PSEUDO, MAIL, MDP, URLIMAGECOMPTE) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmtinsert->execute([$nom, $prenom, $pseudo, $email, $password, $url]);
+
+            $stmetselect = $pdo->prepare("SELECT IDCOMPTE from COMPTE where PSEUDO = ? AND NOM = ?");
+            $stmetselect->execute([$pseudo, $nom]);
+            $result = $stmetselect->fetch(PDO::FETCH_ASSOC);
+            $user_id = $result['idcompte'] ?? 20;
+            echo json_encode(["success" => true, "message" => "Compte créé avec succès", "id" => $user_id]);
         } catch (PDOException $e) {
             echo json_encode(["success" => false, "message" => "Erreur lors de la création du compte: " . $e->getMessage()]);
         }

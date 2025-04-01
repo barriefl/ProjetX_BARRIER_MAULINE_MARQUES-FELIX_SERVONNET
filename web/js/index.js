@@ -50,7 +50,7 @@ const connexionForm = document.getElementById("connexionForm");
 
             const email = document.getElementById("connexionEmail").value;
             const password = document.getElementById("connexionPassword").value;
-
+            console.log(email + " " + password)
             fetch("back/db.php", {  // Vérifie bien le chemin ici (selon ton projet)
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -58,9 +58,8 @@ const connexionForm = document.getElementById("connexionForm");
             })
             .then(response => response.json()) // Convertit la réponse en JSON
             .then(data => {
-                alert(data.message); // Affiche le message du serveur
                 if (data.success) {
-                    window.location.href = "main.html"; // Redirige vers main.html si succès
+                    window.location.href = `main.html?id=${data.id}`; // Redirige vers main.html si succès
                 }
             })
             .catch(error => console.error("Erreur :", error));
@@ -97,7 +96,8 @@ const inscriptionForm = document.getElementById("inscriptionForm");
             .then(response => response.json()) // Convertit la réponse en JSON
             .then(data => {
                 if (data.success) {
-                    window.location.href = `main.html?id=${data.user_id}`; // Redirige vers main.html si succès
+                    console.log(data)
+                    window.location.href = `main.html?id=${data.id}`; // Redirige vers main.html si succès
                 }
             })
                 .catch(error => console.error("Erreur :", error))

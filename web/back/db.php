@@ -16,25 +16,22 @@ try {
 
 // Vérifier si la requête est bien une POST
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $inputData = json_decode($_POST["data"], true); // Récupère les données JSON envoyées
 
-    $email = $inputData["email"] ?? "alan.smithee@example.com";
-    $password = $inputData["password"] ?? "Docker";
 
-    if (!empty($email) && !empty($password)) {
-        $stmt = $pdo->prepare("SELECT IDCOMPTE, MAIL, PSEUDO, MDP FROM COMPTE WHERE MAIL = ?");
-        $stmt->execute([$email]);
+    $emailPseudo = $_POST["email"] ?? "";
+    $password = $_POST["password"] ?? "";
+    
+    if (!empty($emailPseudo) && !empty($password)) {
+        $stmt = $pdo->prepare("SELECT IDCOMPTE, MAIL, PSEUDO, MDP FROM COMPTE WHERE MAIL = ? OR PSEUDO = ?");
+        $stmt->execute([$emailPseudo,$emailPseudo]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $user_id = $user['idcompte'] ?? 20;
         if ($password == $user["mdp"]) {
             // Si la connexion réussie, retourne les informations du compte
             echo json_encode([
                 "success" => true,
                 "message" => "Connexion réussie",
-                "user" => [
-                    "id" => $user["IDCOMPTE"],
-                    "email" => $user["MAIL"],
-                    "username" => $user["PSEUDO"]
-                ]
+                "id" => $user_id
             ]);
         } else {
             echo json_encode(["success" => false, "message" => "Identifiants incorrects " . $user["mdp"] . " " . $password]);
