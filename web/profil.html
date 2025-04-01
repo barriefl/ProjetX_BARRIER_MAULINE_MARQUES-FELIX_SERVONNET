@@ -10,7 +10,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
     />
-    <script src="js/main.js" defer></script>
+    <script src="js/profil.js" defer></script>
   </head>
   <body>
     <div class="left-sidebar">
@@ -66,7 +66,7 @@
           >
         </li>
         <li>
-          <a href="profil.html"
+          <a href="#"
             ><span class="icon"><i class="bi bi-person"></i></span> Profil</a
           >
         </li>
@@ -83,27 +83,32 @@
         <span class="more-info"><i class="bi bi-three-dots"></i></span>
       </div>
     </div>
+
     <div class="container container-border">
-      <div class="tab-menu">
-        <button href="#" class="active">Pour vous</button>
-        <button href="#">Abonnements</button>
-      </div>
 
-      <!-- Header -->
-      <div class="header">
-        <div class="header-tweet">
-          <img src="" alt="" class="avatar"/>
-          <input type="text" placeholder="Quoi de neuf ?" />
-        </div>
-        <div class="header-buttons">
-          <label class="image-label" for="image-input"><i class="bi bi-image"></i></label>
-          <input class="image-input" type="file" accept="image/*" id="image-input"></input>
-          <button class="post-button">Poster</button>
-        </div>
-      </div>
+        <!-- Header -->
+        <div class="middle-profil">
+            <div class="header">
+                <a href="main.html"><span class="icon"><i class="bi bi-arrow-left"></i></span></a>
+                <div class="header-user">
+                    <span id="username">XeroZ</span>
+                    <span id="nbPost">4 posts</span>
+                </div>
+            </div>
 
-      <!-- Post -->
-      <div class="posts-container"></div>
+            <div class="user-info-profil">
+                <img src="" alt="Photo de profil" class="avatar-profil">
+                <span id="username">XeroZ</span>
+            </div>
+            
+            <div class="tab-menu">
+                <button href="#" class="active">Posts</button>
+                <button href="#">Retweets</button>
+                <button href="#">Commentaires</button>
+                <button href="#">J'aime</button>
+            </div>
+        </div>
+
     </div>
     <div class="right-sidebar">
       <!-- Barre de recherche -->

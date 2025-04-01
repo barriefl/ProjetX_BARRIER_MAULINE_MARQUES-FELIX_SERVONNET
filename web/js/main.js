@@ -1,7 +1,6 @@
 // Récupérer l'ID de l'utilisateur à partir de l'URL
 const urlParams = new URLSearchParams(window.location.search);
 const userId = urlParams.get('id');
-console.log(userId)
 // Si un ID est présent, faire une requête pour récupérer les informations de l'utilisateur
 if (userId) {
     fetch(`back/get_user.php?id=${userId}`)
@@ -10,12 +9,12 @@ if (userId) {
             console.log(data)
             if (data.success) {
                 // Afficher les données récupérées dans l'interface
-                const avatars = document.querySelectorAll(".avatar");
+                const imgsavatars = document.querySelectorAll(".avatar");
 
-                // Pour chaque élément avatar, modifie son attribut src
-                avatars.forEach((avatar) => {
-                    avatar.src = data.user.urlimagecompte;
+                imgsavatars.forEach(img => {
+                    img.src = data.user.urlimagecompte;
                 });
+
                 document.getElementById("username").textContent = data.user.pseudo;
                 // Ajouter d'autres éléments à afficher selon ce que tu souhaites
             } else {
@@ -144,6 +143,9 @@ document.addEventListener("DOMContentLoaded", () => {
                             .then(data => {
                                 divComment.innerHTML = "";
                                 data.forEach(comment => {
+
+                                    console.log(comment);
+
                                     const commentDiv = document.createElement("div");
                                     commentDiv.classList.add("comment");
 
