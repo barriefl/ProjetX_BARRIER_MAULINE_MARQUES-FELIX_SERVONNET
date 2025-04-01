@@ -10,7 +10,12 @@ if (userId) {
             console.log(data)
             if (data.success) {
                 // Afficher les données récupérées dans l'interface
-                document.querySelector(".avatar").src = data.user.urlimagecompte;
+                const avatars = document.querySelectorAll(".avatar");
+
+                // Pour chaque élément avatar, modifie son attribut src
+                avatars.forEach((avatar) => {
+                    avatar.src = data.user.urlimagecompte;
+                });
                 document.getElementById("username").textContent = data.user.pseudo;
                 // Ajouter d'autres éléments à afficher selon ce que tu souhaites
             } else {
