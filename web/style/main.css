@@ -185,35 +185,40 @@ body {
     color: #aaa;
 }
 
-.post {
+.bi-heart {
+    color: #fff;
+    font-size: 20px;
+}
+
+.content {
     padding: 15px;
     border-bottom: 1px solid #333;
 }
 
-.post .user-info {
+.content .user-info {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
 }
 
-.post .user-info img {
+.content .user-info img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     margin-right: 10px;
 }
 
-.post .user-info .username {
+.content .user-info .username {
     font-weight: bold;
 }
 
-.post .content {
+.content .item {
     border-radius: 10px;
     padding: 20px;
     text-align: center;
 }
 
-.post .content button {
+.content .item button {
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -223,17 +228,13 @@ body {
     cursor: pointer;
 }
 
-.post .actions {
+.content .actions {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
     font-size: 14px;
     color: #aaa;
     align-items: center;
-}
-
-.post img {
-    max-width: 100%;
 }
 
 .tab-menu {
@@ -266,96 +267,76 @@ body {
     max-height: 100vh;
 }
 
- .search-bar {
-     display: flex;
-     padding: 10px 20px;
-     margin-bottom: 20px;
-     border-radius: 20px;
-     border: 1px solid #333;
- }
-
- .search-bar input {
-     flex: 1;
-     background: transparent;
-     border: none;
-     outline: none;
-     color: #ffffff;
- }
-
- .search-bar i {
-     margin-right: 10px;
- }
-
- .card {
+.search-bar {
+    display: flex;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border-radius: 20px;
     border: 1px solid #333;
-     border-radius: 10px;
-     padding: 20px;
-     margin-bottom: 20px;
- }
+}
 
- .card h3 {
-     margin-top: 0;
- }
+.search-bar input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-size: 16px;
+}
 
- .card .button {
-     display: inline-block;
-     background-color: #007bff;
-     color: #ffffff;
-     text-decoration: none;
-     padding: 10px 20px;
-     border-radius: 20px;
-     margin-top: 10px;
-     text-align: center;
- }
+.search-bar i {
+    margin-right: 10px;
+}
 
- .suggestion {
-     display: flex;
-     align-items: center;
-     margin-bottom: 15px;
- }
+.card {
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
 
- .suggestion img {
-     width: 40px;
-     height: 40px;
-     border-radius: 50%;
-     margin-right: 10px;
- }
+.card h3 {
+    margin-bottom: 10px;
+}
 
- .suggestion .info {
-     flex: 1;
- }
+.suggestion {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
 
- .suggestion .info .username {
-     font-weight: bold;
- }
+.username {
+    font-weight: bold;
+}
 
- .suggestion .info .handle {
-     color: #aaa;
- }
+.link-more {
+    text-decoration: none;
+}
 
- .trends {
-     list-style: none;
-     padding: 0;
-     margin: 0;
- }
+.trends {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 
- .trends li {
-     margin-bottom: 15px;
- }
+.trends li {
+    margin-bottom: 15px;
+}
 
- .trends li span {
-     display: block;
-     color: #aaa;
-     font-size: 12px;
- }
+.trends li span {
+    display: block;
+    color: #aaa;
+    font-size: 12px;
+}
 
- .trends li .title {
-     font-weight: bold;
- }
+.trends li .title {
+    font-weight: bold;
+}
 
- .post img{
+.post-image {
     max-width: 475px;
     max-height: 550px;
+    margin-top: 10px;
 }
 
 .imgcomment{
@@ -384,8 +365,6 @@ body {
     width: 25px;
     height: 25px;
 }
-
-
 
 .butretweet{
     background-color: #000;
