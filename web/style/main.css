@@ -229,6 +229,7 @@ body {
     margin-top: 10px;
     font-size: 14px;
     color: #aaa;
+    align-items: center;
 }
 
 .post img {
@@ -364,4 +365,21 @@ body {
 
 .butcomment{
     border: none;
+}
+
+.butlike {
+    background-color: #000;
+    border: none;
+}
+
+.imglike {
+    width: 25px;
+    height: 25px;
+}
+
+.imgliked {
+    background-color: #FFF;
+    border: none;
+    width: 25px;
+    height: 25px;
 }

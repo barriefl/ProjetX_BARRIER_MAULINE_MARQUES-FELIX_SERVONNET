@@ -27,7 +27,8 @@ create table A_LIKE (
 /*==============================================================*/
 create table A_RETWEET (
    IDCOMPTE             INT4                 not null,
-   IDPOST              INT4                 not null,
+   IDPOST               INT4                 not null,
+   DESCRIPTION          VARCHAR(400)         null,
    constraint PK_A_RETWEET primary key (IDCOMPTE, IDPOST)
 );
 
@@ -121,15 +122,15 @@ ALTER TABLE POST
 
 
 INSERT INTO COMPTE (PSEUDO, NOM, PRENOM, MAIL, DATENAISSANCE, TELEPHONE, URLIMAGECOMPTE, MDP) VALUES
-('alan_smithee', 'Smithee', 'Alan', 'alan.smithee@example.com', '1975-08-15', '0612345678', 'https://media.licdn.com/dms/image/v2/D4E03AQGpEqqMLKPi5g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1729075132234?e=2147483647&v=beta&t=XZONS51nO--_1mh4ngDroIDwFZAwgJTL8EG4axBDnQg','Docker'),
-('arthur_besse', 'Besse', 'Arthur', 'arthur.besse@example.com', '1982-11-22', '0623456789', 'http://example.com/image2.jpg','Docker'),
-('franz_bibfeldt', 'Bibfeldt', 'Franz', 'franz.bibfeldt@example.com', '1990-03-10', '0634567890', 'http://example.com/image3.jpg','Docker'),
-('jean_botul', 'Botul', 'Jean', 'jean.botul@example.com', '1985-06-30', '0645678901', 'http://example.com/image4.jpg','Docker'),
-('blanche_dumas', 'Dumas', 'Blanche', 'blanche.dumas@example.com', '1992-07-25', '0656789012', 'http://example.com/image5.jpg','Docker'),
-('nicolas_renard', 'Renard', 'Nicolas', 'nicolas.renard@example.com', '1988-09-15', '0667890123', 'http://example.com/image6.jpg','Docker'),
-('g_peck', 'Peck', 'Georges', 'georges.peck@example.com', '1980-01-05', '0678901234', 'http://example.com/image7.jpg','Docker'),
-('john_doe', 'Doe', 'John', 'john.doe@example.com', '1993-12-01', '0689012345', 'http://example.com/image8.jpg','Docker'),
-('basile_dupond', 'Dupond', 'Basile', 'basile.dupond@example.com', '1991-04-20', '0690123456', 'http://example.com/image9.jpg','Docker'),
+('alan_smithee', 'Smithee', 'Alan', 'alan.smithee@example.com', '1975-08-15', '0612345678', 'https://static.wikia.nocookie.net/scoobydoo/images/e/e4/Bernie_Alan.png/revision/latest?cb=20190207165213','Docker'),
+('arthur_besse', 'Besse', 'Arthur', 'arthur.besse@example.com', '1982-11-22', '0623456789', 'https://image-uniservice.linternaute.com/image/450/3/2388945607/4968498.jpg','Docker'),
+('franz_bibfeldt', 'Bibfeldt', 'Franz', 'franz.bibfeldt@example.com', '1990-03-10', '0634567890', 'https://divinity.uchicago.edu/sites/default/files/styles/sightings_article_featured_image/public/2022-04/screen_shot_2022-04-06_at_2.07.57_pm.v1.jpg?itok=Wy32DcH1','Docker'),
+('jean_botul', 'Botul', 'Jean', 'jean.botul@example.com', '1985-06-30', '0645678901', 'https://www.causeur.fr/wp-content/uploads/2010/03/BHL.jpg','Docker'),
+('blanche_dumas', 'Dumas', 'Blanche', 'blanche.dumas@example.com', '1992-07-25', '0656789012', 'https://pictures.abebooks.com/inventory/11256788587.jpg','Docker'),
+('nicolas_renard', 'Renard', 'Nicolas', 'nicolas.renard@example.com', '1988-09-15', '0667890123', 'https://i1.rgstatic.net/ii/profile.image/573331118059520-1513704198030_Q512/Nicolas-Renard.jpg','Docker'),
+('g_peck', 'Peck', 'Georges', 'georges.peck@example.com', '1980-01-05', '0678901234', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Gregory_Peck_1948.jpg/250px-Gregory_Peck_1948.jpg','Docker'),
+('john_doe', 'Doe', 'John', 'john.doe@example.com', '1993-12-01', '0689012345', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkxxfsmRLNHvaTnM9rfNREqjXkU9zcjcUDXWTSm2b9KEHUDceiKwJmecnJ_vsyZ4i7MMY&usqp=CAU','Docker'),
+('basile_dupond', 'Dupond', 'Basile', 'basile.dupond@example.com', '1991-04-20', '0690123456', 'https://media.licdn.com/dms/image/v2/D4E03AQFuHaAyZikY2g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1696261449971?e=2147483647&v=beta&t=_QbtRbDA1e965XgZpM98-BvwAOyUZs1zax8DLdg_gEY','Docker'),
 ('adam_blade', 'Blade', 'Adam', 'adam.blade@example.com', '1987-08-30', '0612345679', 'http://example.com/image10.jpg','Docker'),
 ('paracelse_2', 'Paracelse', 'Philippe', 'philippe.paracelse@example.com', '1493-11-11', '0623456780', 'http://example.com/image11.jpg','Docker'),
 ('ivan_petrov', 'Petrov', 'Ivan', 'ivan.petrov@example.com', '1817-07-29', '0634567891', 'http://example.com/image12.jpg','Docker'),
@@ -168,7 +169,7 @@ INSERT INTO A_LIKE (IDCOMPTE, IDPOST) VALUES
 (8, 2), (16, 3), (5, 5), (6, 4), (11, 1);
 
 
-
-INSERT INTO A_RETWEET (IDCOMPTE, IDPOST) VALUES 
+-- A FAIRE.
+INSERT INTO A_RETWEET (IDCOMPTE, IDPOST, DESCRIPTION) VALUES 
 (3, 2), (12, 4), (1, 5), (18, 3), (7, 1),
 (14, 2), (9, 4), (11, 5), (5, 3), (6, 1);
