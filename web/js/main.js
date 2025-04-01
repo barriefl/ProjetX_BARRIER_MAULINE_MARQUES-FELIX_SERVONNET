@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const postImage = document.createElement('img');
                 postImage.src = post.urlimage;
                 postImage.alt = "Post Image";
+                postImage.classList.add('post-image');
 
                 content.appendChild(description);
                 content.appendChild(postImage);
