@@ -66,4 +66,42 @@ const connexionForm = document.getElementById("connexionForm");
             .catch(error => console.error("Erreur :", error));
         });
     }
-});
+
+
+// Gestion de l'inscription
+const inscriptionForm = document.getElementById("inscriptionForm");
+
+    if (inscriptionForm) {
+        inscriptionForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const nom = document.getElementById("name").value;
+            const prenom = document.getElementById("surname").value;
+            const pseudo = document.getElementById("username").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const urlimage = document.getElementById("urlimage").value;
+
+            fetch("back/insert_compte.php", {  // Vérifie bien le chemin ici (selon ton projet)
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    nom: nom,
+                    prenom: prenom,
+                    pseudo: pseudo,
+                    mail: email,
+                    password: password,
+                    url: urlimage
+                })
+            })
+            .then(response => response.json()) // Convertit la réponse en JSON
+            .then(data => {
+                if (data.success) {
+                    window.location.href = `main.html?id=${data.user_id}`; // Redirige vers main.html si succès
+                }
+            })
+                .catch(error => console.error("Erreur :", error))
+            });
+        }
+    })
+
