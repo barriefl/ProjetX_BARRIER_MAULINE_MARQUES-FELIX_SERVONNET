@@ -14,7 +14,7 @@
   </head>
   <body>
     <div class="left-sidebar">
-      <div class="logo"><a href="/main.html">Projet &Xopf;</a></div>
+      <div class="logo" id="home"><a href="">Projet &Xopf;</a></div>
       <ul class="menu">
         <li id="home">
           <a href="#"
@@ -79,7 +79,7 @@
       <button class="post-button big-post-button">Poster</button>
       <div class="user-info">
         <img src="" class="avatar"></span>
-        <span id="username"></span>
+        <span id="username" class="username"></span>
         <span class="more-info"><i class="bi bi-three-dots"></i></span>
       </div>
     </div>
@@ -89,17 +89,12 @@
         <!-- Header -->
         <div class="middle-profil">
             <div class="header">
-                <a href="main.html"><span class="icon"><i class="bi bi-arrow-left"></i></span></a>
-                <div class="header-user">
-                    <img src="" class="avatar"></span>
-                    <span id="username"></span>
-                    <span id="nbPost">4 posts</span>
-                </div>
+                <a href="" class="header-arrow"><span class="icon"><i class="bi bi-arrow-left"></i></span></a>
             </div>
 
             <div class="user-info-profil">
                 <img src="" alt="Photo de profil" class="avatar">
-                <span id="username">XeroZ</span>
+                <span id="username" class="username"></span>
             </div>
             
             <div class="tab-menu">
@@ -108,8 +103,8 @@
               <button id="commentsBtn">Commentaires</button>
               <button id="likesBtn">J'aime</button>
           </div>
-          
-          <div id="content" class="content"></div>
+          <div class="posts-container" id="posts-container">
+          </div>
         </div>
 
     </div>
@@ -120,30 +115,17 @@
         <input type="text" placeholder="Chercher" />
       </div>
 
-      <!-- Section Premium
+      <!-- Section Premium -->
       <div class="card">
-        <h3>Abonnez-vous à Premium</h3>
-        <p>
-          Abonnez-vous pour profiter de nouvelles fonctionnalités et recevoir
-          une part des revenus si vous respectez les critères.
-        </p>
-        <button class="button-blue">Souscrire</button>
-      </div> -->
-
-      <!-- Suggestions
-      <div class="card">
-        <h3>Suggestions</h3>
-        <div class="suggestion">
-          <button class="follow-button">Suivre</button>
+        <div class="card-content">
+          <h3>Abonnez-vous à Premium</h3>
+          <span>
+            Abonnez-vous pour profiter de nouvelles fonctionnalités et recevoir
+            une part des revenus si vous respectez les critères.
+          </span>
         </div>
-        <div class="suggestion">
-          <button class="follow-button">Suivre</button>
-        </div>
-        <div class="suggestion">
-          <button class="follow-button">Suivre</button>
-        </div>
-        <button class="button-blue">Voir plus</button>
-      </div> -->
+        <button class="post-button">Souscrire</button>
+      </div> 
 
       <!-- Tendances -->
       <div class="card">

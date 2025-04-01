@@ -23,7 +23,7 @@ if (userId) {
         })
         .catch(error => console.error("Erreur :", error));
 
-    const butprofil = document.getElementById('butprofil') 
+    const butprofil = document.getElementById('button-profil') 
     butprofil.addEventListener("click", () => {
         window.location.href = `profil.html?id=${userId}`;
     })
@@ -41,9 +41,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // Création de la section user-info
                 const userInfo = document.createElement('div');
-                userInfo.classList.add('user-info');
+                userInfo.classList.add('user-info-post');
 
                 const userAvatar = document.createElement('img');
+                userAvatar.classList.add('avatar');
                 userAvatar.src = post.urlimagecompte;
                 userAvatar.alt = "User Avatar";
 
@@ -155,9 +156,11 @@ document.addEventListener("DOMContentLoaded", () => {
                             console.log("True")
 
                             const input = document.createElement('input')
-                            input.classList="inputRT"
+                            input.classList = "inputRt"
+                            input.placeholder = "Une petite citation ?"
                             const butconfirm = document.createElement('button')
-                            butconfirm.textContent="Confirmer"
+                            butconfirm.textContent = "Poster"
+                            butconfirm.classList = "post-button" 
                             butconfirm.addEventListener("click", () => {
                                 const texte = input.value
                                 Retweet(post, texte)
@@ -166,9 +169,8 @@ document.addEventListener("DOMContentLoaded", () => {
                             })
                             divRT.appendChild(input)
                             divRT.appendChild(butconfirm)
+
                         } else {
-                            console.log("False")
-                            // Incrémenter le compteur de likes
                             Retweet(post, null)
                         }
                     })
@@ -195,25 +197,17 @@ document.addEventListener("DOMContentLoaded", () => {
                             .then(response => response.json())
                             .then(data => {
                                 if (data.success) {
-                                    // Incrémenter le compteur de likes
-                                    console.log(1)
                                     retweetsCount.textContent = parseInt(retweetsCount.textContent) + 1;
+                                    iconRetweet.classList.add('retweet');
                                 } else {
-                                    // Incrémenter le compteur de likes
-                                    console.log(2)
-
                                     retweetsCount.textContent = parseInt(retweetsCount.textContent) - 1;
+                                    iconRetweet.classList.remove('retweet');
                                 }
                             })
                             .catch(error => {
                                 console.error('Erreur de communication avec le serveur : ', error);
                             });
-                    }
-                    
-                    
-
-
-
+                        }
 
                 // Bouton pour les commentaires avec une image
                 const buttonComment = document.createElement('button');
@@ -291,9 +285,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // Création de la section user-info
                 const userInfo = document.createElement('div');
-                userInfo.classList.add('user-info');
+                userInfo.classList.add('user-info-post');
 
                 const userAvatar = document.createElement('img');
+                userAvatar.classList.add('avatar');
                 userAvatar.src = post.urlimagecompte;
                 userAvatar.alt = "User Avatar";
 

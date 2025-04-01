@@ -43,24 +43,24 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .then(response => response.json())
         .then(data => {
-            const contentDiv = document.getElementById("content");
-            contentDiv.innerHTML = ''; // Vider le contenu avant de l'actualiser
-
+            const containerDiv = document.querySelector(".posts-container");
+            containerDiv.innerHTML = '';
+            
             // Selon l'endpoint, on appelle la fonction correspondante
             if (endpoint.includes("posts")) {
-                displayPosts(data, contentDiv);
+                displayPosts(data, containerDiv);
             } else if (endpoint.includes("retweets")) {
-                displayRetweets(data, contentDiv);
+                displayRetweets(data, containerDiv);
             } else if (endpoint.includes("comments")) {
-                displayComments(data, contentDiv);
+                displayComments(data, containerDiv);
             } else if (endpoint.includes("likes")) {
-                displayLikes(data, contentDiv);
+                displayLikes(data, containerDiv);
             }
         })
         .catch(error => {
             console.error("Error loading data:", error);
-            const contentDiv = document.getElementById("content");
-            contentDiv.innerHTML = "Erreur de chargement des données.";
+            const containerDiv = document.getElementById("content");
+            containerDiv.innerHTML = "Erreur de chargement des données.";
         });
     }
 
@@ -102,8 +102,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Fonction pour afficher les posts
-    function displayPosts(data, contentDiv) {
+    function displayPosts(data, containerDiv) {
         data.forEach(item => {
+            const contentDiv = document.createElement("div");
+            contentDiv.classList.add('content');
+
             const itemDiv = document.createElement("div");
             itemDiv.classList.add('item');
 
@@ -118,23 +121,35 @@ document.addEventListener("DOMContentLoaded", () => {
             itemDiv.appendChild(image);
 
             contentDiv.appendChild(itemDiv);
+
+            containerDiv.appendChild(contentDiv);
         });
     }
 
     // Fonction pour afficher les retweets
-    function displayRetweets(data, contentDiv) {
+    function displayRetweets(data, containerDiv) {
         data.forEach(item => {
+            const contentDiv = document.createElement("div");
+            contentDiv.classList.add('content');
+
             const itemDiv = document.createElement("div");
             itemDiv.classList.add('item');
 
+            const userInfo = document.createElement('div');
+            userInfo.classList.add('user-info-post');
+
             const userAvatar = document.createElement('img');
+            userAvatar.classList.add('avatar');
             userAvatar.src = item.urlimagecompte;
             userAvatar.alt = "User Avatar";
-            itemDiv.appendChild(userAvatar)
+            userInfo.appendChild(userAvatar)
 
-            const author = document.createElement("p");
-            author.textContent = `Auteur: ${item.pseudo}`;
-            itemDiv.appendChild(author);
+            const username = document.createElement("p");
+            username.textContent = `${item.pseudo}`;
+            username.classList.add('username');
+            userInfo.appendChild(username);
+
+            contentDiv.appendChild(userInfo);
 
             const descriptionrt = document.createElement("p");
             descriptionrt.textContent = item.descriptionrt;
@@ -149,29 +164,40 @@ document.addEventListener("DOMContentLoaded", () => {
             image.src = item.urlimage;
             itemDiv.appendChild(image);
 
-
-
             contentDiv.appendChild(itemDiv);
+
+            containerDiv.appendChild(contentDiv);
         });
     }
 
     // Fonction pour afficher les commentaires
-    function displayComments(data, contentDiv) {
+    function displayComments(data, containerDiv) {
         data.forEach(item => {
+
+            const contentDiv = document.createElement("div");
+            contentDiv.classList.add('content');
 
             const itemDiv = document.createElement("div");
             itemDiv.classList.add('item');
 
+            const userInfo = document.createElement('div');
+            userInfo.classList.add('user-info-post');
+
             const userAvatar = document.createElement('img');
+            userAvatar.classList.add('avatar');
             userAvatar.src = item.urlimagecompte;
             userAvatar.alt = "User Avatar";
-            itemDiv.appendChild(userAvatar)
 
-            const pseudo = document.createElement("p");
-            pseudo.textContent = `Auteur: ${item.pseudo}`;
-            itemDiv.appendChild(pseudo);
+            const username = document.createElement('span');
+            username.classList.add('username');
+            username.textContent = `${item.pseudo}`;
 
-            const title = document.createElement("h3");
+            userInfo.appendChild(userAvatar);
+            userInfo.appendChild(username);
+
+            contentDiv.appendChild(userInfo);
+
+            const title = document.createElement("p");
             title.textContent = item.description;
             itemDiv.appendChild(title);
 
@@ -181,23 +207,31 @@ document.addEventListener("DOMContentLoaded", () => {
             itemDiv.appendChild(image);
             
             const commentText = document.createElement("p");
+            commentText.classList.add('comment-text');
             commentText.textContent = item.texte;
             itemDiv.appendChild(commentText);
 
             contentDiv.appendChild(itemDiv);
+
+            containerDiv.appendChild(contentDiv);
         });
     }
 
     // Fonction pour afficher les likes
-    function displayLikes(data, contentDiv) {
+    function displayLikes(data, containerDiv) {
         data.forEach(item => {
+                        
+            const contentDiv = document.createElement("div");
+            contentDiv.classList.add('content');
+
             const itemDiv = document.createElement("div");
             itemDiv.classList.add('item');
 
             const userInfo = document.createElement('div');
-            userInfo.classList.add('user-info');
+            userInfo.classList.add('user-info-post');
 
             const userAvatar = document.createElement('img');
+            userAvatar.classList.add('avatar');
             userAvatar.src = item.urlimagecompte;
             userAvatar.alt = "User Avatar";
 
@@ -210,24 +244,21 @@ document.addEventListener("DOMContentLoaded", () => {
             userInfo.appendChild(userAvatar);
             userInfo.appendChild(userDetails);
 
-            const content = document.createElement('div');
-            content.classList.add('content');
+            contentDiv.appendChild(userInfo);
 
             const description = document.createElement('p');
             description.textContent = item.description;
+            itemDiv.appendChild(description);
 
             const postImage = document.createElement('img');
             postImage.classList.add('post-image');
             postImage.src = item.urlimage;
             postImage.alt = "Post Image";
-
-            content.appendChild(description);
-            content.appendChild(postImage);
-
-            itemDiv.appendChild(userInfo);
-            itemDiv.appendChild(content);
+            itemDiv.appendChild(postImage);
 
             contentDiv.appendChild(itemDiv);
+
+            containerDiv.appendChild(contentDiv);
         });
     }
 
