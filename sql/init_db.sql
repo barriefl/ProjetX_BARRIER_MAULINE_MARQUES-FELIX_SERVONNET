@@ -170,7 +170,7 @@ INSERT INTO A_LIKE (IDCOMPTE, IDPOST) VALUES
 (8, 2), (16, 3), (5, 5), (6, 4), (11, 1);
 
 
--- A FAIRE.
+
 INSERT INTO A_RETWEET (IDCOMPTE, IDPOST, DESCRIPTION) VALUES 
-(1, 5, "Le football il a changé")
-(19, 3, "Mac c'est vraiment mieux que Windows")
+(1, 5, "Le football il a changé"),
+(19, 3, "Mac c'est vraiment mieux que Windows");
