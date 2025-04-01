@@ -16,6 +16,7 @@ if (userId) {
                 avatars.forEach((avatar) => {
                     avatar.src = data.user.urlimagecompte;
                 });
+
                 document.getElementById("username").textContent = data.user.pseudo;
                 // Ajouter d'autres éléments à afficher selon ce que tu souhaites
             } else {
@@ -100,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 imgcommment.src = "./image/inverted_image.png"
                 buttoncomment.appendChild(imgcommment)
                 buttoncomment.addEventListener("click", () => {
-                    
+         
                     const div = document.getElementById('comment' + post.idpost); // Trouver la div des commentaires
                     
                     // Si la div n'est pas vide, cela signifie que les commentaires sont déjà affichés, donc on les vide
@@ -111,11 +112,15 @@ document.addEventListener("DOMContentLoaded", () => {
                         fetch(`../back/fetch_comment.php?idpost=${post.idpost}`)
                             .then(response => response.json())
                             .then(data => {
-                
                                 // Vider la div pour éviter les doublons
                                 div.innerHTML = "";
+
+                                console.log(data)
                 
                                 data.forEach(comment => {
+
+                                    console.log(comment);
+
                                     const commentDiv = document.createElement("div");
                                     commentDiv.classList.add("comment");
                 
@@ -134,9 +139,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 });
                 
-                
-                
-
                 actions.appendChild(likes);
                 actions.appendChild(buttoncomment);
 

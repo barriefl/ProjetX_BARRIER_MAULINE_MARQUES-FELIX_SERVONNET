@@ -238,17 +238,25 @@ body {
 .tab-menu {
     display: flex;
     justify-content: space-around;
-    padding: 10px;
+    padding: 10px 10px 0 10px ;
     border-bottom: 1px solid #333;
 }
 
-.tab-menu a {
+.tab-menu button {
+    background-color: transparent;
+    border: none;
     color: #fff;
-    text-decoration: none;
+    cursor: pointer;
     padding: 10px;
+    width: 100%;
+    font-size: 16px;
 }
 
-.tab-menu a.active {
+.tab-menu button:hover {
+    background-color: #333;
+}
+
+.tab-menu button.active {
     border-bottom: 2px solid #007bff;
 }
 

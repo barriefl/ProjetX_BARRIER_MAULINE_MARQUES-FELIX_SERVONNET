@@ -141,6 +141,7 @@ INSERT INTO COMPTE (PSEUDO, NOM, PRENOM, MAIL, DATENAISSANCE, TELEPHONE, URLIMAG
 ('blanche_martin', 'Martin', 'Blanche', 'blanche.martin@example.com', '1992-07-25', '0690123457', 'http://example.com/image18.jpg','Docker'),
 ('ptit_loup_blanc', 'Diard', 'Benoit', 'benoit.diard@example.com', '1992-07-25', '0620123457', 'https://yt3.googleusercontent.com/ytc/AIf8zZTxYl71_NKMyOWfsEa7HW67NkgmVR_39MeJRo3a=s900-c-k-c0x00ffffff-no-rj','Docker');
 
+docker rmi <image_id_ou_nom>
 
 
 INSERT INTO POST (IDCOMPTE, DESCRIPTION, URLIMAGE, COMPTEURLIKE) VALUES
