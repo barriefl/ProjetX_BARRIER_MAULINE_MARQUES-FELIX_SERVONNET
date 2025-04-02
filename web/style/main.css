@@ -97,7 +97,7 @@ body {
     justify-content: space-between;
 }
 
-.user-info-post {
+.user-info-post, .user-info-profil {
     width: fit-content;
 }
 
@@ -385,5 +385,5 @@ body {
 .comment, .comment-text {
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    margin: 10px 0;
 }

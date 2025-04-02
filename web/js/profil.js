@@ -151,7 +151,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                     .catch(error => console.error("Erreur :", error))
             })
+
             butsupprimer.textContent = "Supprimer mon post"
+            butsupprimer.classList.add('post-button');
 
             contentDiv.appendChild(itemDiv);
             contentDiv.appendChild(butsupprimer);
@@ -307,13 +309,11 @@ document.addEventListener("DOMContentLoaded", () => {
             image.classList.add('post-image');
             image.src = item.urlimage;
             itemDiv.appendChild(image);
-            
-
 
             contentDiv.appendChild(itemDiv);
 
             const userInfocommment = document.createElement('div');
-            userInfocommment.classList.add('user-info-post');
+            userInfocommment.classList.add('user-info-profil');
 
             const userAvatarcomment = document.createElement('img');
             userAvatarcomment.src=urlimage
@@ -351,12 +351,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                     .catch(error => console.error("Erreur :", error))
             })
+
             butsupprimer.textContent = "Supprimer mon commentaire"
+            butsupprimer.classList.add('post-button')
 
             userInfocommment.appendChild(userAvatarcomment)
             userInfocommment.appendChild(usernamecomment)
-            userInfocommment.appendChild(commentText);
             contentDiv.appendChild(userInfocommment);
+            contentDiv.appendChild(commentText);
             contentDiv.appendChild(butsupprimer)
 
 
