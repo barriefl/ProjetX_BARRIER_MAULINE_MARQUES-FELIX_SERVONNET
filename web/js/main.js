@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const buttonRetweet = document.createElement('button');
                 buttonRetweet.classList += "butretweet"
                 const iconRetweet = document.createElement("i");
-                iconRetweet.classList.add('bi', 'bi-arrow-left-right');
+                iconRetweet.classList.add('bi', 'bi-arrow-left-right', 'icon-retweet');
                 buttonRetweet.appendChild(iconRetweet);
                 divRetweet.appendChild(buttonRetweet)
                 divRetweet.appendChild(retweetsCount);
