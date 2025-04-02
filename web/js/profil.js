@@ -331,9 +331,9 @@ document.addEventListener("DOMContentLoaded", () => {
             butsupprimer.id = item.idpost
             butsupprimer.classList.add(item.idcommentaire)
             butsupprimer.addEventListener("click", () => {
-                const idcom = butsupprimer.classList.value
+                const idcom = butsupprimer.classList.value.charAt(0);
                 const idpost = butsupprimer.id
-                console.log(idpost)
+                console.log(idcom)
                 fetch("back/delete_commentaire.php", {  // Vérifie bien le chemin ici (selon ton projet)
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -344,8 +344,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                 .then(response => response.json()) // Convertit la réponse en JSON
                 .then(data => {
+                    console.log(data)
                     if (data.success) {
-                        console.log(data)
+  
                         window.location.href = `profil.html?id=${userId}`; // Redirige vers main.html si succès
                     }
                 })
