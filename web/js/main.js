@@ -1,6 +1,11 @@
 // Récupérer l'ID de l'utilisateur à partir de l'URL
 const urlParams = new URLSearchParams(window.location.search);
 const userId = urlParams.get('id');
+
+const deco = document.getElementById("Deconnexion")
+deco.addEventListener("click", () => {
+    window.location.href = `/`;
+})
 // Si un ID est présent, faire une requête pour récupérer les informations de l'utilisateur
 if (userId) {
     fetch(`back/get_user.php?id=${userId}`)

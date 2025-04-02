@@ -8,6 +8,11 @@ home.forEach(but => {
         window.location.href = `main.html?id=${userId}`;
     })
 });
+
+const deco = document.getElementById("Deconnexion")
+deco.addEventListener("click", () => {
+    window.location.href = `/`;
+})
 // Si un ID est présent, faire une requête pour récupérer les informations de l'utilisateur
 if (userId) {
     fetch(`back/get_user.php?id=${userId}`)
