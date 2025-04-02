@@ -151,7 +151,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                     .catch(error => console.error("Erreur :", error))
             })
+
             butsupprimer.textContent = "Supprimer mon post"
+            butsupprimer.classList.add('post-button');
 
             contentDiv.appendChild(itemDiv);
             contentDiv.appendChild(butsupprimer);
@@ -169,32 +171,79 @@ document.addEventListener("DOMContentLoaded", () => {
             const itemDiv = document.createElement("div");
             itemDiv.classList.add('item');
 
+            const retweetDiv = document.createElement("div");
+            retweetDiv.classList.add('retweet-profil-container');
+
+            const iconRetweet = document.createElement("i");
+            iconRetweet.classList.add('bi', 'bi-arrow-left-right', 'retweet-icon-profil');
+            retweetDiv.appendChild(iconRetweet);
+
+            const retweetProfil = document.createElement("span");
+            retweetProfil.classList.add('retweet-profil');
+            retweetProfil.textContent = "vous avez reposté"
+            retweetDiv.appendChild(retweetProfil);
+
+            contentDiv.appendChild(retweetDiv);
+
             const userInfo = document.createElement('div');
             userInfo.classList.add('user-info-post');
 
-            const userInfocommment = document.createElement('div');
-            userInfocommment.classList.add('user-info-post');
+            if (item.descriptionrt != "") {
+                
+                const userInfocommment = document.createElement('div');
+                userInfocommment.classList.add('user-info-profil');
 
-            const userAvatarcomment = document.createElement('img');
-            userAvatarcomment.src=urlimage
-            userAvatarcomment.classList.add('avatar');
+                const userAvatarcomment = document.createElement('img');
+                userAvatarcomment.src=urlimage
+                userAvatarcomment.classList.add('avatar');
 
-            const usernamecomment = document.createElement('span')
-            usernamecomment.textContent=pseudo
-            usernamecomment.setAttribute("id", "username")
+                const usernamecomment = document.createElement('span')
+                usernamecomment.textContent = pseudo
+                usernamecomment.classList.add('username')
+                usernamecomment.setAttribute("id", "username")
+                
+                const descriptionrt = document.createElement("p");
+                descriptionrt.textContent = item.descriptionrt;
+                userInfocommment.appendChild(descriptionrt);
 
-            const descriptionrt = document.createElement("p");
-            descriptionrt.textContent = item.descriptionrt;
-            userInfocommment.appendChild(descriptionrt);
+                userInfocommment.appendChild(userAvatarcomment)
+                userInfocommment.appendChild(usernamecomment)
+                contentDiv.appendChild(userInfocommment);
+                contentDiv.appendChild(descriptionrt);
 
+                const postDiv = document.createElement("div");
+                postDiv.classList.add('post-retweet-container');
 
-            userInfocommment.appendChild(userAvatarcomment)
-            userInfocommment.appendChild(usernamecomment)
-            userInfocommment.appendChild(descriptionrt);
-            contentDiv.appendChild(userInfocommment);
+                const userAvatar = document.createElement('img');
+                userAvatar.classList.add('avatar');
+                userAvatar.src = item.urlimagecompte;
+                userAvatar.alt = "User Avatar";
+                userInfo.appendChild(userAvatar)
 
+                const username = document.createElement("p");
+                username.textContent = `${item.pseudo}`;
+                username.classList.add('username');
+                userInfo.appendChild(username);
 
+                postDiv.appendChild(userInfo);
+                
+                const description = document.createElement("p");
+                description.textContent = item.description;
+                itemDiv.appendChild(description);
 
+                const image = document.createElement("img");
+                image.classList.add('post-image');
+                image.src = item.urlimage;
+                itemDiv.appendChild(image);
+
+                postDiv.appendChild(itemDiv);
+
+                contentDiv.appendChild(postDiv);
+
+                containerDiv.appendChild(contentDiv);
+            }
+            else {
+                
             const userAvatar = document.createElement('img');
             userAvatar.classList.add('avatar');
             userAvatar.src = item.urlimagecompte;
@@ -207,8 +256,6 @@ document.addEventListener("DOMContentLoaded", () => {
             userInfo.appendChild(username);
 
             contentDiv.appendChild(userInfo);
-
-
             
             const description = document.createElement("p");
             description.textContent = item.description;
@@ -222,6 +269,8 @@ document.addEventListener("DOMContentLoaded", () => {
             contentDiv.appendChild(itemDiv);
 
             containerDiv.appendChild(contentDiv);
+            
+            }
         });
     }
 
@@ -260,13 +309,11 @@ document.addEventListener("DOMContentLoaded", () => {
             image.classList.add('post-image');
             image.src = item.urlimage;
             itemDiv.appendChild(image);
-            
-
 
             contentDiv.appendChild(itemDiv);
 
             const userInfocommment = document.createElement('div');
-            userInfocommment.classList.add('user-info-post');
+            userInfocommment.classList.add('user-info-profil');
 
             const userAvatarcomment = document.createElement('img');
             userAvatarcomment.src=urlimage
@@ -300,12 +347,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                     .catch(error => console.error("Erreur :", error))
             })
+
             butsupprimer.textContent = "Supprimer mon commentaire"
+            butsupprimer.classList.add('post-button')
 
             userInfocommment.appendChild(userAvatarcomment)
             userInfocommment.appendChild(usernamecomment)
-            userInfocommment.appendChild(commentText);
             contentDiv.appendChild(userInfocommment);
+            contentDiv.appendChild(commentText);
             contentDiv.appendChild(butsupprimer)
 
 

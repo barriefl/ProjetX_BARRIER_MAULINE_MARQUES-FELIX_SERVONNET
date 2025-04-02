@@ -6,11 +6,9 @@
 }
 
 body {
-    margin: 0;
     background-color: #000;
     font-family: Arial, Helvetica, sans-serif;
     color: white;
-    padding: 0;
     display: flex;
     justify-content: center;
     padding: 20px;
@@ -88,20 +86,38 @@ body {
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 15px;
-    cursor: pointer;
     transition: all 0.3s ease-in-out;
+}
+
+.user-info, .user-info-post {
+    cursor: pointer;
 }
 
 .user-info {
     justify-content: space-between;
 }
 
-.user-info-post {
+.user-info-post, .user-info-profil {
     width: fit-content;
 }
 
-.user-info-profil .username {
+.retweet-profil-container {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #aaa;
+}
 
+.retweet-icon-profil {
+    margin-right: 5px;
+}
+
+.post-retweet-container {
+    padding: 15px;
+    margin: 15px;
+    border: 1px solid #333;
+    height: fit-content;
+    border-radius: 15px;
 }
 
 .avatar {
@@ -184,7 +200,7 @@ body {
     font-size: 18px;
 }
 
-.bi-heart, .bi-chat, .bi-arrow-left-right {
+.bi-heart, .bi-chat, .icon-retweet {
     color: #fff;
     font-size: 20px;
     margin-right: 5px;
@@ -205,7 +221,7 @@ body {
     color: blue;
 }
 
-.bi-arrow-left-right:hover {
+.icon-retweet:hover {
     color: lightgreen;
 }
 
@@ -369,5 +385,5 @@ body {
 .comment, .comment-text {
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    margin: 10px 0;
 }
