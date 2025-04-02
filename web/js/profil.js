@@ -112,6 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Fonction pour afficher les posts
     function displayPosts(data, containerDiv) {
         data.forEach(item => {
+            console.log(item)
             const contentDiv = document.createElement("div");
             contentDiv.classList.add('content');
 
@@ -127,8 +128,33 @@ document.addEventListener("DOMContentLoaded", () => {
             image.alt = "Post Image";
             image.src = item.urlimage;
             itemDiv.appendChild(image);
+            console.log(item.idpost)
+            const butsupprimer = document.createElement('button')
+            butsupprimer.classList.add(item.idpost)
+            butsupprimer.addEventListener("click", () => {
+                console.log("salut")
+                const postid= butsupprimer.classList.value
+                console.log(postid)
+                fetch("back/delete_post.php", {  // Vérifie bien le chemin ici (selon ton projet)
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        id:postid,
+                    })
+                })
+                .then(response => response.json()) // Convertit la réponse en JSON
+                .then(data => {
+                    console.log(data);
+                    if (data.success) {
+                        window.location.href = `profil.html?id=${userId}`; // Redirige vers main.html si succès
+                    }
+                })
+                    .catch(error => console.error("Erreur :", error))
+            })
+            butsupprimer.textContent = "Supprimer mon post"
 
             contentDiv.appendChild(itemDiv);
+            contentDiv.appendChild(butsupprimer);
 
             containerDiv.appendChild(contentDiv);
         });
@@ -249,7 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Fonction pour afficher les commentaires
     function displayComments(data, containerDiv) {
         data.forEach(item => {
-
+            console.log(item)
             const contentDiv = document.createElement("div");
             contentDiv.classList.add('content');
 
@@ -300,11 +326,34 @@ document.addEventListener("DOMContentLoaded", () => {
             const commentText = document.createElement("p");
             commentText.classList.add('comment-text');
             commentText.textContent = item.texte;
+            console.log(item.idcommentaire)
+            const butsupprimer = document.createElement('button')
+            butsupprimer.classList.add(item.idcommentaire)
+            butsupprimer.addEventListener("click", () => {
+                const idcom = butsupprimer.classList.value
+                fetch("back/delete_commentaire.php", {  // Vérifie bien le chemin ici (selon ton projet)
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        id:idcom,
+                    })
+                })
+                .then(response => response.json()) // Convertit la réponse en JSON
+                .then(data => {
+                    if (data.success) {
+                        console.log(data)
+                        window.location.href = `profil.html?id=${userId}`; // Redirige vers main.html si succès
+                    }
+                })
+                    .catch(error => console.error("Erreur :", error))
+            })
+            butsupprimer.textContent = "Supprimer mon commentaire"
 
             userInfocommment.appendChild(userAvatarcomment)
             userInfocommment.appendChild(usernamecomment)
             userInfocommment.appendChild(commentText);
             contentDiv.appendChild(userInfocommment);
+            contentDiv.appendChild(butsupprimer)
 
 
             containerDiv.appendChild(contentDiv);

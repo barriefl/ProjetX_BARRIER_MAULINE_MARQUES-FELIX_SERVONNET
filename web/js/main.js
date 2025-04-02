@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     .then(data => {
                         if (data.success) {
                             console.log("True")
-
+                            divRT.innerHTML =""
                             const input = document.createElement('input')
                             input.classList = "inputRt"
                             input.placeholder = "Une petite citation ?"

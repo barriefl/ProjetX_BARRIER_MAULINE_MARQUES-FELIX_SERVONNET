@@ -10,7 +10,6 @@ drop table if exists COMPTE cascade;
 drop table if exists POST cascade;
 
 
-
 /*==============================================================*/
 /* Table : A_LIKE                                               */
 /*==============================================================*/
@@ -19,7 +18,6 @@ create table A_LIKE (
    IDPOST              INT4                 not null,
    constraint PK_A_LIKE primary key (IDCOMPTE, IDPOST)
 );
-
 
 
 /*==============================================================*/
@@ -33,7 +31,6 @@ create table A_RETWEET (
 );
 
 
-
 /*==============================================================*/
 /* Table : COMMENTAIRE                                          */
 /*==============================================================*/
@@ -45,7 +42,6 @@ create table COMMENTAIRE (
    DATECOMMENTAIRE      DATE                 null,
    constraint PK_COMMENTAIRE primary key (IDCOMMENTAIRE)
 );
-
 
 
 /*==============================================================*/
@@ -65,7 +61,6 @@ create table COMPTE (
 );
 
 
-
 /*==============================================================*/
 /* Table : POST                                                 */
 /*==============================================================*/
@@ -81,47 +76,51 @@ create table POST (
 );
 
 
+/*==============================================================*/
+/* Foreign Key Constraints with ON DELETE CASCADE                */
+/*==============================================================*/
 
 alter table A_LIKE
    add constraint FK_A_LIKE_A_LIKE_COMPTE foreign key (IDCOMPTE)
       references COMPTE (IDCOMPTE)
-      on delete restrict on update restrict;
+      on delete cascade on update restrict;
 
 alter table A_LIKE
    add constraint FK_A_LIKE_A_LIKE2_POST foreign key (IDPOST)
       references POST (IDPOST)
-      on delete restrict on update restrict;
+      on delete cascade on update restrict;
 
 alter table A_RETWEET
    add constraint FK_A_RETWEE_A_RETWEET_COMPTE foreign key (IDCOMPTE)
       references COMPTE (IDCOMPTE)
-      on delete restrict on update restrict;
+      on delete cascade on update restrict;
 
 alter table A_RETWEET
    add constraint FK_A_RETWEE_A_RETWEET_POST foreign key (IDPOST)
       references POST (IDPOST)
-      on delete restrict on update restrict;
+      on delete cascade on update restrict;
 
 alter table COMMENTAIRE
    add constraint FK_COMMENTA_ASSOCIATI_COMPTE foreign key (IDCOMPTE)
       references COMPTE (IDCOMPTE)
-      on delete restrict on update restrict;
+      on delete cascade on update restrict;
 
 alter table COMMENTAIRE
    add constraint FK_COMMENTA_ASSOCIATI_POST foreign key (IDPOST)
       references POST (IDPOST)
-      on delete restrict on update restrict;
+      on delete cascade on update restrict;
 
 alter table POST
    add constraint FK_POST_A_PUBLIER_COMPTE foreign key (IDCOMPTE)
       references COMPTE (IDCOMPTE)
-      on delete restrict on update restrict;
+      on delete cascade on update restrict;
+
 
 ALTER TABLE POST
 	ALTER COLUMN DATEPOST SET DEFAULT CURRENT_DATE;
 
 
-
+-- Insertion des données
 INSERT INTO COMPTE (PSEUDO, NOM, PRENOM, MAIL, DATENAISSANCE, TELEPHONE, URLIMAGECOMPTE, MDP) VALUES
 ('alan_smithee', 'Smithee', 'Alan', 'alan.smithee@example.com', '1975-08-15', '0612345678', 'https://static.wikia.nocookie.net/scoobydoo/images/e/e4/Bernie_Alan.png','Docker'),
 ('arthur_besse', 'Besse', 'Arthur', 'arthur.besse@example.com', '1982-11-22', '0623456789', 'https://image-uniservice.linternaute.com/image/450/3/2388945607/4968498.jpg','Docker'),
@@ -143,7 +142,6 @@ INSERT INTO COMPTE (PSEUDO, NOM, PRENOM, MAIL, DATENAISSANCE, TELEPHONE, URLIMAG
 ('blanche_martin', 'Martin', 'Blanche', 'blanche.martin@example.com', '1992-07-25', '0690123457', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFT35NwLVnNVNyrope5hBErzJLxXCGL8aiaokT1zcrZP53_PenVoR0gbafDRjvcRGDDLo&usqp=CAU','Docker'),
 ('ptit_loup_blanc', 'Diard', 'Benoit', 'benoit.diard@example.com', '1992-07-25', '0620123457', 'https://yt3.googleusercontent.com/ytc/AIdro_mLLRhkeJ7k0pvJUoBEpAobSVf9LP-Yr1SLulbxyly7SQ=s160-c-k-c0x00ffffff-no-rj','Docker');
 
-
 INSERT INTO POST (IDCOMPTE, DESCRIPTION, URLIMAGE, COMPTEURLIKE, COMPTEURRETWEET) VALUES
 ('1','Top 7 des rappeurs qui se sont deja fait djoufara. TOP 7 ...','https://www.lexpress.fr/resizer/gWttpIey3Dg75MChpRWQjtt1j-o=/883x0/cloudfront-eu-central-1.images.arcpublishing.com/lexpress/LFQZF36YDJA6ZDLQXH4JVRAKCY.jpg',20,3),
 ('2','Salut mes pupuces nouveaux showcases a l''AZAR STUDIO 52 dimanche soir 23h','https://th.bing.com/th/id/OIP.CAf0BGuAyhkXHkAt98-PJwHaIf?rs=1&pid=ImgDetMain',10,5),
@@ -160,7 +158,6 @@ INSERT INTO COMMENTAIRE (IDCOMPTE, IDPOST, TEXTE) VALUES
 (12,4,'Grave intéressant comme d''hab');
 
 
-
 INSERT INTO A_LIKE (IDCOMPTE, IDPOST) VALUES 
 (3, 2), (12, 4), (1, 5), (18, 3), (7, 1), 
 (14, 2), (9, 4), (11, 5), (5, 3), (6, 1),
@@ -168,7 +165,6 @@ INSERT INTO A_LIKE (IDCOMPTE, IDPOST) VALUES
 (16, 2), (10, 4), (15, 5), (12, 1), (3, 4),
 (9, 2), (18, 5), (1, 3), (7, 4), (14, 1),
 (8, 2), (16, 3), (5, 5), (6, 4), (11, 1);
-
 
 
 INSERT INTO A_RETWEET (IDCOMPTE, IDPOST, DESCRIPTIONRT) VALUES 
