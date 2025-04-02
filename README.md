@@ -48,23 +48,35 @@ Le projet est structuré comme suit :
 
 
 ## Base de données
+Le projet utilise PostreSQL pour stocker les données.
 - SGBD : PostgreSQL 8
-- Tables : COMPTE, COMMENTAIRE, POST, A_LIKE, A_RETWEET
+- Tables : 
+    - `COMPTE` : Contient les informations des utilisateurs.
+    - `COMMENTAIRE` : Contient les commentaires sur les posts.
+    - `POST` : Contient les posts publiés par les utilisateurs.
+    - `A_LIKE` : Gère les likes sur les posts.
+    - `A_RETWEET` : Gère les retweets des posts.
 
 
 ## Commandes pour lancer le projet
 ### GitHub
-Pour cloner ce dépôt sur votre machine locale :
-- `git clone [https://github.com/barriefl/ProjetX_BARRIER_MAULINE_MARQUES-FELIX_SERVONNET]`(https://github.com/barriefl/ProjetX_BARRIER_MAULINE_MARQUES-FELIX_SERVONNET)
-- `cd ProjetX`
-- `docker-compose up -d`
+- Pour cloner ce dépôt sur votre machine locale :
+    - `git clone https://github.com/barriefl/ProjetX_BARRIER_MAULINE_MARQUES-FELIX_SERVONNET`
+    - `cd ProjetX`
+    - `docker-compose up -d`
+- Pour arrêter les services Docker :
+    - `docker-compose down`
 ### DockerHub
-
+- En attente...
 
 
 ## URL de la page d'accueil
-localhost:12500
+http://localhost:12500
 
+
+## Liens utiles
+- **Dépôt GitHub** : ([Lien vers le dépôt GitHub](https://github.com/barriefl/ProjetX_BARRIER_MAULINE_MARQUES-FELIX_SERVONNET))
+- **Image DockerHub** : ([Lien vers le dépôt DockerHub]())
 
 ## Aide
 Pour toute question ou assistance, n'hésitez pas à contacter l'un des contributeurs ci-dessus.
