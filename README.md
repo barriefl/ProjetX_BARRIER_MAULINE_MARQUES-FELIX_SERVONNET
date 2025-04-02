@@ -62,12 +62,13 @@ Le projet utilise PostreSQL pour stocker les données.
 ### GitHub
 - Pour cloner ce dépôt sur votre machine locale :
     - `git clone https://github.com/barriefl/ProjetX_BARRIER_MAULINE_MARQUES-FELIX_SERVONNET`
-    - `cd ProjetX`
+    - `cd ProjetX_BARRIER_MAULINE_MARQUES-FELIX_SERVONNET`
     - `docker-compose up -d`
+    - Et sur un navigateur ouvrir `http://localhost:12500`
 - Pour arrêter les services Docker :
     - `docker-compose down`
 ### DockerHub
-- En attente...
+- Pour recupérer le projet et directement le lancer taper
 
 
 ## URL de la page d'accueil
