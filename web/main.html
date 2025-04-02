@@ -94,12 +94,13 @@
       <div class="header">
         <div class="header-tweet">
           <img src="" alt="" class="avatar"/>
-          <input type="text" placeholder="Quoi de neuf ?" class="inputRt" id="inputpost"/>
+          <input type="text" placeholder="Quoi de neuf ?" class="inputRt" id="inputpost" required/>
+          <input type="text" placeholder="URL Image" class="inputRt" id="urlpost" required/>
         </div>
         <div class="header-buttons">
-          <label class="image-label" for="image-input"><i class="bi bi-image"></i></label>
-          <input class="image-input" type="file" accept="image/*" id="image-input"></input>
-          <button class="post-button">Poster</button>
+          <!-- <label class="image-label" for="image-input"><i class="bi bi-image"></i></label>
+          <input class="image-input" type="file" accept="image/*" id="image-input"></input> -->
+          <button class="post-button" id="butpost">Poster</button>
         </div>
       </div>
 

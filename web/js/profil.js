@@ -1,5 +1,13 @@
 const urlParams = new URLSearchParams(window.location.search);
 const userId = urlParams.get('id');
+var pseudo = ""
+var urlimage = ""
+const home = document.querySelectorAll('#home') 
+home.forEach(but => {
+    but.addEventListener("click", () => {
+        window.location.href = `main.html?id=${userId}`;
+    })
+});
 // Si un ID est présent, faire une requête pour récupérer les informations de l'utilisateur
 if (userId) {
     fetch(`back/get_user.php?id=${userId}`)
@@ -7,6 +15,8 @@ if (userId) {
         .then(data => {
             console.log(data)
             if (data.success) {
+                urlimage =data.user.urlimagecompte
+                pseudo = data.user.pseudo
                 // Afficher les données récupérées dans l'interface
                 const imgsavatars = document.querySelectorAll(".avatar");
                 imgsavatars.forEach(img => {
@@ -23,11 +33,9 @@ if (userId) {
             }
         })
         .catch(error => console.error("Erreur :", error));
-        const home = document.getElementById('home') 
-        home.addEventListener("click", () => {
-            window.location.href = `main.html?id=${userId}`;
-        })
+
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
     // Exemple de userId (vous pouvez le récupérer dynamiquement selon votre logique)
@@ -138,6 +146,29 @@ document.addEventListener("DOMContentLoaded", () => {
             const userInfo = document.createElement('div');
             userInfo.classList.add('user-info-post');
 
+            const userInfocommment = document.createElement('div');
+            userInfocommment.classList.add('user-info-post');
+
+            const userAvatarcomment = document.createElement('img');
+            userAvatarcomment.src=urlimage
+            userAvatarcomment.classList.add('avatar');
+
+            const usernamecomment = document.createElement('span')
+            usernamecomment.textContent=pseudo
+            usernamecomment.setAttribute("id", "username")
+
+            const descriptionrt = document.createElement("p");
+            descriptionrt.textContent = item.descriptionrt;
+            userInfocommment.appendChild(descriptionrt);
+
+
+            userInfocommment.appendChild(userAvatarcomment)
+            userInfocommment.appendChild(usernamecomment)
+            userInfocommment.appendChild(descriptionrt);
+            contentDiv.appendChild(userInfocommment);
+
+
+
             const userAvatar = document.createElement('img');
             userAvatar.classList.add('avatar');
             userAvatar.src = item.urlimagecompte;
@@ -151,9 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             contentDiv.appendChild(userInfo);
 
-            const descriptionrt = document.createElement("p");
-            descriptionrt.textContent = item.descriptionrt;
-            itemDiv.appendChild(descriptionrt);
+
             
             const description = document.createElement("p");
             description.textContent = item.description;
@@ -206,12 +235,30 @@ document.addEventListener("DOMContentLoaded", () => {
             image.src = item.urlimage;
             itemDiv.appendChild(image);
             
+
+
+            contentDiv.appendChild(itemDiv);
+
+            const userInfocommment = document.createElement('div');
+            userInfocommment.classList.add('user-info-post');
+
+            const userAvatarcomment = document.createElement('img');
+            userAvatarcomment.src=urlimage
+            userAvatarcomment.classList.add('avatar');
+
+            const usernamecomment = document.createElement('span')
+            usernamecomment.textContent=pseudo
+            usernamecomment.setAttribute("id", "username")
+
             const commentText = document.createElement("p");
             commentText.classList.add('comment-text');
             commentText.textContent = item.texte;
-            itemDiv.appendChild(commentText);
 
-            contentDiv.appendChild(itemDiv);
+            userInfocommment.appendChild(userAvatarcomment)
+            userInfocommment.appendChild(usernamecomment)
+            userInfocommment.appendChild(commentText);
+            contentDiv.appendChild(userInfocommment);
+
 
             containerDiv.appendChild(contentDiv);
         });
