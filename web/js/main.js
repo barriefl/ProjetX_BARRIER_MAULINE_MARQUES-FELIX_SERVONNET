@@ -275,7 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         divComment.innerHTML = ""; // Enlever les commentaires
                     } else {
                         const input = document.createElement('input')
-                            input.classList = "inputRT"
+                            input.classList = "inputRt"
                             input.placeholder = "Une petit commentaire ?"
                             const butconfirm = document.createElement('button')
                             butconfirm.textContent = "Poster"

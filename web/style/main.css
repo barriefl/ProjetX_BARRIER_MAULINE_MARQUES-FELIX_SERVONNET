@@ -250,16 +250,6 @@ body {
     text-align: center;
 }
 
-.item button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    margin-top: 10px;
-    cursor: pointer;
-}
-
 .actions {
     display: flex;
     justify-content: space-between;
@@ -387,4 +377,8 @@ body {
     display: flex;
     align-items: center;
     margin: 10px 0;
+}
+
+.like-container {
+    margin-top: 5px;
 }
