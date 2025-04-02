@@ -1,30 +1,36 @@
 # ProjetX_BARRIER_MAULINE_MARQUES-FELIX_SERVONNET
 
 
-# Contributeurs
-BARRIER Florian : Back, README, Diaporama
-MAULINE Yannis : Compte rendu, Back
-MARQUES-FELIX Anthony : Front, Back
-SERVONNET Matthieu : BD, Back, Dockerfile et Dockercompose
+## Contributeurs
+- **BARRIER Florian** : Back-end, README, Diaporama ([GitHub](https://github.com/barriefl))
+- **MAULINE Yannis** : Compte rendu, Back-end ([GitHub](https://github.com/YannisUsmb))
+- **MARQUES-FELIX Anthony** : Front-end, Back-end ([GitHub](https://github.com/Anthony-mf))
+- **SERVONNET Matthieu** : Base de données, Back-end, Dockerfile et Docker Compose ([GitHub](https://github.com/Mat7475))
 
 
-# Description du projet
+## Description du projet
 Le projet "ProjetX" a pour objectif de créer une copie de Twitter avec un front-end et un back-end interconnectés.
 L'application utilise une base de données PostgreSQL et inclut les fonctionnalités suivantes :
-    • Gestion des utilisateurs (COMPTES)
-    • Publication et suppresion des posts (POST)
-    • Ajout et suppression de commentaires et de likes
-    • Fonctionnalités de retweet
+-   • Gestion des utilisateurs (COMPTES)
+-   • Publication et suppression des posts (POST)
+-   • Ajout et suppression de commentaires et de likes
+-   • Fonctionnalités de retweet
 
 
-# Technologies utilisées
-• Back-end : PHP
-• Base de données : PostreSQL
-• Front-end : HTML, CSS, JavaScript
-• Docker : Dockerfile et Docker Compose pour faciliter la gestion des environnements de développement.
+## Technologies utilisées
+- • Back-end : PHP
+- • Base de données : PostgreSQL
+- • Front-end : HTML, CSS, JavaScript
+- • Docker : Dockerfile et Docker Compose pour faciliter la gestion des environnements de développement.
 
 
-# Structure du projet
+## Prérequis
+Avant de commencer, il faut avoir installé les outils suivants :
+-   • Docker
+-   • Docker Compose
+
+
+## Structure du projet
 Le projet est structuré comme suit :
 /ProjetX
     /data                       -> Contient toutes les données de la base, évitant de réutiliser le fichier init_db.sql
@@ -32,7 +38,7 @@ Le projet est structuré comme suit :
     /web                        -> Dossier contenant le back et le front du projet.
         /back                   -> Dossier contenant tous les fichiers php permettant d'intéragir avec les données.
         /images                 -> Dossier contenant toutes les images du projet.
-        /js                     -> Dossier contenant tous les fichiers JavaScript qui gère nos éléments en front et intéragissent avec la partie back.
+        /js                     -> Dossier contenant tous les fichiers JavaScript qui gère nos éléments en front et interagissent avec la partie back.
         /style                  -> Dossier contenant plusieurs fichiers CSS.
         index.html              -> Page de connexion.
         main.html               -> Accueil du ProjetX.
@@ -41,18 +47,24 @@ Le projet est structuré comme suit :
     Dockerfile                  -> Installe les extensions nécessaires.
 
 
-# Base de données
+## Base de données
 SGBD : PostgreSQL 8
 Tables : COMPTE, COMMENTAIRE, POST, A_LIKE, A_RETWEET
 
 
-# Commandes pour lancer le projet
-# GitHub
-# DockerHub
+## Commandes pour lancer le projet
+### GitHub
+Pour cloner ce dépôt sur votre machine locale :
+git clone [https:](https://github.com/barriefl/ProjetX_BARRIER_MAULINE_MARQUES-FELIX_SERVONNET)
+cd ProjetX
+docker-compose up -d
+### DockerHub
 
 
-# URL de la page d'accueil
+
+## URL de la page d'accueil
 localhost:12500
 
 
-# Aide
+## Aide
+Pour toute question ou assistance, n'hésitez pas à contacter l'un des contributeurs ci-dessus.
