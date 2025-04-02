@@ -18,7 +18,7 @@ $userId = $data->userId;
 
 if (!empty($userId)) {
     // Exemple de requête pour récupérer les posts de l'utilisateur
-    $stmt = $pdo->prepare("SELECT URLIMAGE, description FROM POST 
+    $stmt = $pdo->prepare("SELECT URLIMAGE, description, idpost FROM POST 
                             WHERE IDCOMPTE = ?");
     $stmt->execute([$userId]);
 
