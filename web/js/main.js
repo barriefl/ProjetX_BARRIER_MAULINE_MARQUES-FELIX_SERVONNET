@@ -55,12 +55,14 @@ butpost.addEventListener("click", () => {
                 .catch(error => console.error("Erreur :", error))
         })
 
+const postsContainer = document.querySelector('.posts-container');
+
 document.addEventListener("DOMContentLoaded", () => {
     fetch('../back/fetch_posts.php')
         .then(response => response.json())
         .then(data => {
-            const postsContainer = document.querySelector('.posts-container');
             data.forEach(post => {
+                console.log(post)
                 // Création de l'élément principal du post
                 const postElement = document.createElement('div');
                 postElement.classList.add('content');
@@ -84,7 +86,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 likesCount.style.color = "#aaa";
                 likesCount.textContent = ` · ${post.compteurlike} likes`;
 
+                const date = document.createElement('span')
+                date.style.color = "#aaa";
+                const datepost = post.datepost;
+                const dateObject = new Date(datepost);
+
+                const day = String(dateObject.getDate()).padStart(2, '0'); // Ajoute un 0 si besoin
+                const month = String(dateObject.getMonth() + 1).padStart(2, '0'); // getMonth() commence à 0
+                const year = dateObject.getFullYear();
+
+                const formattedDate = `${day}/${month}/${year}`;
+                console.log(formattedDate); // "02/04/2025"
+                date.textContent = "  "+ formattedDate
+
                 userDetails.appendChild(username);
+                userDetails.appendChild(date);
                 userDetails.appendChild(likesCount);
                 userInfo.appendChild(userAvatar);
                 userInfo.appendChild(userDetails);
@@ -255,10 +271,44 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (divComment.innerHTML !== "") {
                         divComment.innerHTML = ""; // Enlever les commentaires
                     } else {
+                        const input = document.createElement('input')
+                            input.classList = "inputRT"
+                            input.placeholder = "Une petit commentaire ?"
+                            const butconfirm = document.createElement('button')
+                            butconfirm.textContent = "Poster"
+                            butconfirm.classList = "post-button" 
+                            butconfirm.addEventListener("click", () => {
+                                const texte = input.value
+                                console.log(texte)
+                                console.log(userId)
+                                console.log(post.idpost)
+                                fetch('back/insert_comm.php', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                    },
+                                    body: JSON.stringify({
+                                        userId: userId,
+                                        postId: post.idpost,
+                                        texte: texte
+                                    })
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    console.log(data)
+                                    if (data.success) {
+                                        
+                                        window.location.href = `main.html?id=${userId}`
+                                    }
+                                })
+                                .catch(error => console.error("Erreur :", error))
+                            })
+                            divComment.appendChild(input)
+                            divComment.appendChild(butconfirm)
+
                         fetch(`../back/fetch_comment.php?idpost=${post.idpost}`)
                             .then(response => response.json())
                             .then(data => {
-                                divComment.innerHTML = "";
                                 data.forEach(comment => {
 
                                     console.log(comment);
@@ -302,7 +352,103 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+        fetch('../back/fetch_retweet.php')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(post => {
+                console.log(post)
+                const contentDiv = document.createElement("div");
+                contentDiv.classList.add("content");
+            
+                // Retweet Info
+                const retweetDiv = document.createElement("div");
+                retweetDiv.classList.add("retweet-profil-container");
+            
+                const iconRetweet = document.createElement("i");
+                iconRetweet.classList.add("bi", "bi-arrow-left-right", "retweet-icon-profil");
+                retweetDiv.appendChild(iconRetweet);
+            
+                const retweetProfil = document.createElement("span");
+                retweetProfil.classList.add("retweet-profil");
+                retweetProfil.textContent = `${post.retweet_auteur} a retweeté le `;
+                
+                const date = document.createElement('span')
+                date.style.color = "#aaa";
+                const datepost = post.datert;
+                const dateObject = new Date(datepost);
 
+                const day = String(dateObject.getDate()).padStart(2, '0'); // Ajoute un 0 si besoin
+                const month = String(dateObject.getMonth() + 1).padStart(2, '0'); // getMonth() commence à 0
+                const year = dateObject.getFullYear();
+
+                const formattedDate = `${day}/${month}/${year}`;
+                console.log(formattedDate); // "02/04/2025"
+                date.innerHTML = `&nbsp;${formattedDate}`;
+
+                retweetDiv.appendChild(retweetProfil);
+                retweetDiv.appendChild(date);
+
+                contentDiv.appendChild(retweetDiv);
+            
+                // Retweet User Info
+                const retweetUserInfo = document.createElement("div");
+                retweetUserInfo.classList.add("user-info-post");
+            
+                const retweetAvatar = document.createElement("img");
+                retweetAvatar.classList.add("avatar");
+                retweetAvatar.src = post.retweet_auteur_image_url;
+                retweetUserInfo.appendChild(retweetAvatar);
+            
+                const retweetUsername = document.createElement("p");
+                retweetUsername.textContent = post.retweet_auteur;
+                retweetUsername.classList.add("username");
+                retweetUserInfo.appendChild(retweetUsername);
+            
+                contentDiv.appendChild(retweetUserInfo);
+            
+                // Retweet Description
+                if (post.retweet_description) {
+                    const retweetDescription = document.createElement("p");
+                    retweetDescription.textContent = post.retweet_description;
+                    contentDiv.appendChild(retweetDescription);
+                }
+            
+                // Original Post Container
+                const postDiv = document.createElement("div");
+                postDiv.classList.add("post-retweet-container");
+            
+                const originalUserInfo = document.createElement("div");
+                originalUserInfo.classList.add("user-info-post");
+            
+                const originalAvatar = document.createElement("img");
+                originalAvatar.classList.add("avatar");
+                originalAvatar.src = post.original_post_auteur_image_url;
+                originalUserInfo.appendChild(originalAvatar);
+            
+                const originalUsername = document.createElement("p");
+                originalUsername.textContent = post.original_post_auteur;
+                originalUsername.classList.add("username");
+                originalUserInfo.appendChild(originalUsername);
+            
+                postDiv.appendChild(originalUserInfo);
+            
+                // Original Post Description
+                const originalDescription = document.createElement("p");
+                originalDescription.textContent = post.original_post_description;
+                postDiv.appendChild(originalDescription);
+            
+                // Original Post Image
+                if (post.original_post_image_url) {
+                    const originalImage = document.createElement("img");
+                    originalImage.classList.add("post-image");
+                    originalImage.src = post.original_post_image_url;
+                    postDiv.appendChild(originalImage);
+                }
+            
+                contentDiv.appendChild(postDiv);
+                postsContainer.appendChild(contentDiv);
+            })
+        })
 
         
 

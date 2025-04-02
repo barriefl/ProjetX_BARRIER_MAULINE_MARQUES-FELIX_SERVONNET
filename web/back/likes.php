@@ -19,7 +19,7 @@ $userId = $data->userId;
 
 if (!empty($userId)) {
     // Récupérer les posts likés par l'utilisateur
-    $stmt = $pdo->prepare("SELECT p.DESCRIPTION, p.URLIMAGE, c.PSEUDO, c.URLIMAGECOMPTE
+    $stmt = $pdo->prepare("SELECT p.DESCRIPTION, p.URLIMAGE, c.PSEUDO, c.URLIMAGECOMPTE, p.compteurlike, p.idpost
                             FROM A_LIKE a
                             JOIN POST p ON p.IDPOST = a.IDPOST
                             JOIN COMPTE c ON c.IDCOMPTE = p.IDCOMPTE

@@ -25,6 +25,8 @@ function fetchPosts($pdo) {
                 POST p
             LEFT JOIN
                 compte c ON p.IDCOMPTE = c.IDCOMPTE
+            ORDER BY 
+                p.DATEPOST DESC
         ";
         $stmt = $pdo->prepare($query);
         $stmt->execute();

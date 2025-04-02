@@ -27,7 +27,8 @@ function fetchPosts($pdo) {
                 p.DESCRIPTION AS original_post_description,
                 p.URLIMAGE AS original_post_image_url,
                 c.PSEUDO AS original_post_auteur,
-                c.URLIMAGECOMPTE AS original_post_auteur_image_url
+                c.URLIMAGECOMPTE AS original_post_auteur_image_url,
+                r.datert
             FROM 
                 A_RETWEET r
             JOIN 
@@ -37,7 +38,7 @@ function fetchPosts($pdo) {
             JOIN 
                 COMPTE c ON p.IDCOMPTE = c.IDCOMPTE 
             ORDER BY 
-                r.IDPOST;
+                r.datert desc;
         ";
         $stmt = $pdo->prepare($query);
         $stmt->execute();

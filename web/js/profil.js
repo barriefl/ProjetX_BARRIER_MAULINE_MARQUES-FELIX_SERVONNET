@@ -132,9 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const butsupprimer = document.createElement('button')
             butsupprimer.classList.add(item.idpost)
             butsupprimer.addEventListener("click", () => {
-                console.log("salut")
-                const postid= butsupprimer.classList.value
-                console.log(postid)
+                const postid= butsupprimer.classList.value.charAt(0);
                 fetch("back/delete_post.php", {  // Vérifie bien le chemin ici (selon ton projet)
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -405,7 +403,50 @@ document.addEventListener("DOMContentLoaded", () => {
             postImage.src = item.urlimage;
             postImage.alt = "Post Image";
             itemDiv.appendChild(postImage);
+            const likeContainer = document.createElement('div');
+            likeContainer.classList.add('like-container');
+            likeContainer.id = item.idpost
+            const postid = likeContainer.id
+            console.log(postid)
+                const buttonLike = document.createElement('button');
+                buttonLike.classList.add('butlike');
+                const iconLike = document.createElement('i');
+                iconLike.classList.add('bi', 'bi-heart');
+                buttonLike.appendChild(iconLike);
 
+                const likes = document.createElement('span');
+                likes.textContent = `${item.compteurlike}`;
+
+                likeContainer.appendChild(buttonLike);
+                likeContainer.appendChild(likes);
+
+                // Ajouter un événement pour gérer le clic sur le bouton like
+                buttonLike.addEventListener("click", () => {
+                    fetch('../back/like_post.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: `post_id=${postid}&user_id=${userId}` 
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Incrémenter le compteur de likes
+                            likes.textContent = parseInt(likes.textContent) + 1;
+                            // Changer l'image du bouton de like
+                            iconLike.classList.replace('bi-heart', 'bi-heart-fill'); // Remplacez par le chemin de votre image "liked"
+                        } else {
+                            // Incrémenter le compteur de likes
+                            likes.textContent = parseInt(likes.textContent) - 1;
+                            // Changer l'image du bouton de like
+                            iconLike.classList.replace('bi-heart-fill', 'bi-heart'); // Remplacez par le chemin de votre image "liked"
+                        }
+                    })
+                    .catch(error => console.error("Erreur lors du like du post :", error));
+                });
+
+            itemDiv.appendChild(likeContainer)
             contentDiv.appendChild(itemDiv);
 
             containerDiv.appendChild(contentDiv);

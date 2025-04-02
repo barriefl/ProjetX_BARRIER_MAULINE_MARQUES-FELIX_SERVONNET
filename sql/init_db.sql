@@ -27,6 +27,7 @@ create table A_RETWEET (
    IDCOMPTE             INT4                 not null,
    IDPOST               INT4                 not null,
    DESCRIPTIONRT        VARCHAR(400)          null,
+   DATERT               TIMESTAMP            default NOW(),  -- Valeur par défaut : date et heure actuelles
    constraint PK_A_RETWEET primary key (IDCOMPTE, IDPOST)
 );
 
@@ -121,6 +122,9 @@ ALTER TABLE POST
 ALTER TABLE COMMENTAIRE
    ALTER COLUMN DATECOMMENTAIRE SET DEFAULT CURRENT_DATE;
 
+ALTER TABLE A_RETWEET
+   ALTER COLUMN DATERT SET DEFAULT CURRENT_DATE;
+
 
 -- Insertion des données
 INSERT INTO COMPTE (PSEUDO, NOM, PRENOM, MAIL, DATENAISSANCE, TELEPHONE, URLIMAGECOMPTE, MDP) VALUES
@@ -144,12 +148,12 @@ INSERT INTO COMPTE (PSEUDO, NOM, PRENOM, MAIL, DATENAISSANCE, TELEPHONE, URLIMAG
 ('blanche_martin', 'Martin', 'Blanche', 'blanche.martin@example.com', '1992-07-25', '0690123457', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFT35NwLVnNVNyrope5hBErzJLxXCGL8aiaokT1zcrZP53_PenVoR0gbafDRjvcRGDDLo&usqp=CAU','Docker'),
 ('ptit_loup_blanc', 'Diard', 'Benoit', 'benoit.diard@example.com', '1992-07-25', '0620123457', 'https://yt3.googleusercontent.com/ytc/AIdro_mLLRhkeJ7k0pvJUoBEpAobSVf9LP-Yr1SLulbxyly7SQ=s160-c-k-c0x00ffffff-no-rj','Docker');
 
-INSERT INTO POST (IDCOMPTE, DESCRIPTION, URLIMAGE, COMPTEURLIKE, COMPTEURRETWEET, COMPTEURCOMM) VALUES
-('1','Top 7 des rappeurs qui se sont deja fait djoufara. TOP 7 ...','https://www.lexpress.fr/resizer/gWttpIey3Dg75MChpRWQjtt1j-o=/883x0/cloudfront-eu-central-1.images.arcpublishing.com/lexpress/LFQZF36YDJA6ZDLQXH4JVRAKCY.jpg',20,3,1),
-('2','Salut mes pupuces nouveaux showcases a l''AZAR STUDIO 52 dimanche soir 23h','https://th.bing.com/th/id/OIP.CAf0BGuAyhkXHkAt98-PJwHaIf?rs=1&pid=ImgDetMain',10,5,1),
-('3','Vous pensez je mesure combien d''iphone','https://m1.quebecormedia.com/emp/emp/Capture_d_e_cran_le_2022_10_25_a_16.09.58661f1f0c-1963-4dc4-a971-4bb400402043_ORIGINAL.jpg?impolicy=crop-resize&x=0&y=49&w=1164&h=653&width=1200',13,11,1),
-('4','OMAR SY : L''INTERVIEW FACE CACHÉE Dispo sur YouTube  https://youtu.be/2yVrWk9WQ2s','https://www.agoravox.tv/local/cache-vignettes/L476xH268/omar-sy-interview-hugo-99372.jpg',8,35,1),
-('5','Il annonce qu''il jouera son dernier match avec le psg dimanche, temps gagné 3 min 40','https://web.cameroonmagazine.com/wp-content/uploads/2024/05/VIDEO-Kylian-Mbappe-annonce-publiquement-son-depart-du-PSG.jpg',18, 22,1);
+INSERT INTO POST (IDCOMPTE, DESCRIPTION, URLIMAGE, COMPTEURLIKE, COMPTEURRETWEET, COMPTEURCOMM, DATEPOST) VALUES
+(1, 'Top 7 des rappeurs qui se sont deja fait djoufara. TOP 7 ...', 'https://www.lexpress.fr/resizer/gWttpIey3Dg75MChpRWQjtt1j-o=/883x0/cloudfront-eu-central-1.images.arcpublishing.com/lexpress/LFQZF36YDJA6ZDLQXH4JVRAKCY.jpg', 20, 3, 1, '2024-02-15 14:23:00'),
+(2, 'Salut mes pupuces nouveaux showcases a l''AZAR STUDIO 52 dimanche soir 23h', 'https://th.bing.com/th/id/OIP.CAf0BGuAyhkXHkAt98-PJwHaIf?rs=1&pid=ImgDetMain', 10, 5, 1, '2024-04-10 19:45:00'),
+(3, 'Vous pensez je mesure combien d''iphone', 'https://m1.quebecormedia.com/emp/emp/Capture_d_e_cran_le_2022_10_25_a_16.09.58661f1f0c-1963-4dc4-a971-4bb400402043_ORIGINAL.jpg?impolicy=crop-resize&x=0&y=49&w=1164&h=653&width=1200', 13, 11, 1, '2024-06-30 08:10:00'),
+(4, 'OMAR SY : L''INTERVIEW FACE CACHÉE Dispo sur YouTube  https://youtu.be/2yVrWk9WQ2s', 'https://www.agoravox.tv/local/cache-vignettes/L476xH268/omar-sy-interview-hugo-99372.jpg', 8, 35, 1, '2024-09-05 22:30:00'),
+(5, 'Il annonce qu''il jouera son dernier match avec le psg dimanche, temps gagné 3 min 40', 'https://web.cameroonmagazine.com/wp-content/uploads/2024/05/VIDEO-Kylian-Mbappe-annonce-publiquement-son-depart-du-PSG.jpg', 18, 22, 1, '2024-12-20 17:55:00');
 
 
 INSERT INTO COMMENTAIRE (IDCOMPTE, IDPOST, TEXTE) VALUES
@@ -169,6 +173,10 @@ INSERT INTO A_LIKE (IDCOMPTE, IDPOST) VALUES
 (8, 2), (16, 3), (5, 5), (6, 4), (11, 1);
 
 
-INSERT INTO A_RETWEET (IDCOMPTE, IDPOST, DESCRIPTIONRT) VALUES 
-(1, 5, 'Le football il a changé'),
-(19, 3, 'Mac c''est vraiment mieux que Windows');
+INSERT INTO A_RETWEET (IDCOMPTE, IDPOST, DESCRIPTIONRT, DATERT) VALUES 
+(1, 5, 'Le football il a changé', '2024-03-12 10:15:00'),
+(19, 3, 'Mac c''est vraiment mieux que Windows', '2024-07-25 18:40:00'),
+(5, 2, 'Toujours présent aux showcases !', '2024-05-30 21:00:00'),
+(8, 1, 'Top 7 des meilleurs moments', '2024-09-10 14:25:00'),
+(12, 4, 'Omar Sy en interview, à voir absolument !', '2024-11-18 08:50:00');
+
