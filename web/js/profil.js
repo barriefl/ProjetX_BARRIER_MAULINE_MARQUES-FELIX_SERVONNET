@@ -328,14 +328,18 @@ document.addEventListener("DOMContentLoaded", () => {
             commentText.textContent = item.texte;
             console.log(item.idcommentaire)
             const butsupprimer = document.createElement('button')
+            butsupprimer.id = item.idpost
             butsupprimer.classList.add(item.idcommentaire)
             butsupprimer.addEventListener("click", () => {
                 const idcom = butsupprimer.classList.value
+                const idpost = butsupprimer.id
+                console.log(idpost)
                 fetch("back/delete_commentaire.php", {  // Vérifie bien le chemin ici (selon ton projet)
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
                         id:idcom,
+                        idpost:idpost
                     })
                 })
                 .then(response => response.json()) // Convertit la réponse en JSON

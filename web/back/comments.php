@@ -21,7 +21,7 @@ $userId = isset($input['userId']) ? $input['userId'] : null;
 
 if (!empty($userId)) {
     // Récupérer les commentaires de l'utilisateur
-    $stmt = $pdo->prepare("SELECT c.TEXTE, comp.PSEUDO, comp.URLIMAGECOMPTE, p.DESCRIPTION, p.URLIMAGE, c.IDCOMMENTAIRE
+    $stmt = $pdo->prepare("SELECT c.TEXTE, comp.PSEUDO, comp.URLIMAGECOMPTE, p.DESCRIPTION, p.URLIMAGE, c.IDCOMMENTAIRE, p.IDPOST
                             FROM COMMENTAIRE c
                             JOIN POST p ON p.IDPOST = c.IDPOST
                             JOIN COMPTE comp ON comp.IDCOMPTE = p.IDCOMPTE

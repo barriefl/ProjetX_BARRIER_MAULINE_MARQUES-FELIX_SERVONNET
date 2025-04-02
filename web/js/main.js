@@ -236,12 +236,17 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
 
                 // Bouton pour les commentaires avec une image
+                const divCommentaffic = document.createElement('div');
+                const commentCount = document.createElement('span');
+                commentCount.textContent = `${post.compteurcomm}`;
                 const buttonComment = document.createElement('button');
                 buttonComment.classList.add('butcomment');
                 const iconComment = document.createElement('i');
                 iconComment.classList.add('bi', 'bi-chat');
                 buttonComment.appendChild(iconComment);
-
+                divCommentaffic.appendChild(buttonComment)
+                divCommentaffic.appendChild(commentCount)
+                
                 // Ajout de l'événement pour afficher/masquer les commentaires
                 const divComment = document.createElement('div');
                 divComment.id = "comment" + post.idpost;
@@ -277,7 +282,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
                 actions.appendChild(likeContainer);
-                actions.appendChild(buttonComment);
+                actions.appendChild(divCommentaffic);
 
                 // Assemblage de toutes les sections dans le postElement
                 postElement.appendChild(userInfo);

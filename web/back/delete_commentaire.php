@@ -21,11 +21,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $inputData = json_decode(file_get_contents("php://input"), true);
 
     $comid = $inputData["id"] ?? "";
+    $postid = $inputData["idpost"] ?? "";
     if (!empty($comid)) {
 
         try {
             $stmtinsert = $pdo->prepare("DELETE FROM COMMENTAIRE WHERE IDCOMMENTAIRE = ? ");
             $stmtinsert->execute([$comid]);
+
+            $stmt = $pdo->prepare("UPDATE POST SET COMPTEURCOMM = COMPTEURCOMM - 1 WHERE IDPOST = ?");
+            $stmt->execute([$postid]);
 
         
             echo json_encode(["success" => true, "message" => "Commentaire supprimée avec succès"]);

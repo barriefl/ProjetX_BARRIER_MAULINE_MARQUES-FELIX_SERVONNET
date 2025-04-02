@@ -1,5 +1,5 @@
 /*==============================================================*/
-/* Nom de SGBD :  PostgreSQL 8                                  */
+/* Nom de SGBD : PostgreSQL 8                                  */
 /* Date de création :  28/03/2025 08:35:36                      */
 /*==============================================================*/
 
@@ -15,7 +15,7 @@ drop table if exists POST cascade;
 /*==============================================================*/
 create table A_LIKE (
    IDCOMPTE             INT4                 not null,
-   IDPOST              INT4                 not null,
+   IDPOST               INT4                 not null,
    constraint PK_A_LIKE primary key (IDCOMPTE, IDPOST)
 );
 
@@ -26,7 +26,7 @@ create table A_LIKE (
 create table A_RETWEET (
    IDCOMPTE             INT4                 not null,
    IDPOST               INT4                 not null,
-   DESCRIPTIONRT          VARCHAR(400)         null,
+   DESCRIPTIONRT        VARCHAR(400)          null,
    constraint PK_A_RETWEET primary key (IDCOMPTE, IDPOST)
 );
 
@@ -39,7 +39,7 @@ create table COMMENTAIRE (
    IDCOMPTE             INT4                 not null,
    IDPOST               INT4                 not null,
    TEXTE                VARCHAR(300)         null,
-   DATECOMMENTAIRE      DATE                 null,
+   DATECOMMENTAIRE      TIMESTAMP            default NOW(),  -- Valeur par défaut : date et heure actuelles
    constraint PK_COMMENTAIRE primary key (IDCOMMENTAIRE)
 );
 
@@ -55,8 +55,8 @@ create table COMPTE (
    MAIL                 VARCHAR(70)          null,
    DATENAISSANCE        DATE                 null,
    TELEPHONE            VARCHAR(10)          null,
-   URLIMAGECOMPTE             TEXT                 null,
-   MDP			VARCHAR(40)	     not null,
+   URLIMAGECOMPTE       TEXT                 null,
+   MDP                  VARCHAR(40)          not null,
    constraint PK_COMPTE primary key (IDCOMPTE)
 );
 
@@ -66,15 +66,15 @@ create table COMPTE (
 /*==============================================================*/
 create table POST (
    IDPOST              SERIAL               not null,
-   IDCOMPTE             INT4                 not null,
-   DESCRIPTION          VARCHAR(400)         null,
-   URLIMAGE             TEXT                 null,
-   COMPTEURLIKE         INT4                 null,
-   COMPTEURRETWEET      INT4                 null,
-   DATEPOST			      DATE		            null,
+   IDCOMPTE            INT4                 not null,
+   DESCRIPTION         VARCHAR(400)         null,
+   URLIMAGE            TEXT                 null,
+   COMPTEURLIKE        INT4                 null,
+   COMPTEURRETWEET     INT4                 null,
+   COMPTEURCOMM        INT4                 null,
+   DATEPOST            TIMESTAMP            default NOW(),  -- Valeur par défaut : date et heure actuelles
    constraint PK_POST primary key (IDPOST)
 );
-
 
 /*==============================================================*/
 /* Foreign Key Constraints with ON DELETE CASCADE                */
@@ -115,9 +115,11 @@ alter table POST
       references COMPTE (IDCOMPTE)
       on delete cascade on update restrict;
 
-
 ALTER TABLE POST
-	ALTER COLUMN DATEPOST SET DEFAULT CURRENT_DATE;
+   ALTER COLUMN DATEPOST SET DEFAULT CURRENT_DATE;
+
+ALTER TABLE COMMENTAIRE
+   ALTER COLUMN DATECOMMENTAIRE SET DEFAULT CURRENT_DATE;
 
 
 -- Insertion des données
@@ -142,12 +144,12 @@ INSERT INTO COMPTE (PSEUDO, NOM, PRENOM, MAIL, DATENAISSANCE, TELEPHONE, URLIMAG
 ('blanche_martin', 'Martin', 'Blanche', 'blanche.martin@example.com', '1992-07-25', '0690123457', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFT35NwLVnNVNyrope5hBErzJLxXCGL8aiaokT1zcrZP53_PenVoR0gbafDRjvcRGDDLo&usqp=CAU','Docker'),
 ('ptit_loup_blanc', 'Diard', 'Benoit', 'benoit.diard@example.com', '1992-07-25', '0620123457', 'https://yt3.googleusercontent.com/ytc/AIdro_mLLRhkeJ7k0pvJUoBEpAobSVf9LP-Yr1SLulbxyly7SQ=s160-c-k-c0x00ffffff-no-rj','Docker');
 
-INSERT INTO POST (IDCOMPTE, DESCRIPTION, URLIMAGE, COMPTEURLIKE, COMPTEURRETWEET) VALUES
-('1','Top 7 des rappeurs qui se sont deja fait djoufara. TOP 7 ...','https://www.lexpress.fr/resizer/gWttpIey3Dg75MChpRWQjtt1j-o=/883x0/cloudfront-eu-central-1.images.arcpublishing.com/lexpress/LFQZF36YDJA6ZDLQXH4JVRAKCY.jpg',20,3),
-('2','Salut mes pupuces nouveaux showcases a l''AZAR STUDIO 52 dimanche soir 23h','https://th.bing.com/th/id/OIP.CAf0BGuAyhkXHkAt98-PJwHaIf?rs=1&pid=ImgDetMain',10,5),
-('3','Vous pensez je mesure combien d''iphone','https://m1.quebecormedia.com/emp/emp/Capture_d_e_cran_le_2022_10_25_a_16.09.58661f1f0c-1963-4dc4-a971-4bb400402043_ORIGINAL.jpg?impolicy=crop-resize&x=0&y=49&w=1164&h=653&width=1200',13,11),
-('4','OMAR SY : L''INTERVIEW FACE CACHÉE Dispo sur YouTube  https://youtu.be/2yVrWk9WQ2s','https://www.agoravox.tv/local/cache-vignettes/L476xH268/omar-sy-interview-hugo-99372.jpg',8,35),
-('5','Il annonce qu''il jouera son dernier match avec le psg dimanche, temps gagné 3 min 40','https://web.cameroonmagazine.com/wp-content/uploads/2024/05/VIDEO-Kylian-Mbappe-annonce-publiquement-son-depart-du-PSG.jpg',18, 22);
+INSERT INTO POST (IDCOMPTE, DESCRIPTION, URLIMAGE, COMPTEURLIKE, COMPTEURRETWEET, COMPTEURCOMM) VALUES
+('1','Top 7 des rappeurs qui se sont deja fait djoufara. TOP 7 ...','https://www.lexpress.fr/resizer/gWttpIey3Dg75MChpRWQjtt1j-o=/883x0/cloudfront-eu-central-1.images.arcpublishing.com/lexpress/LFQZF36YDJA6ZDLQXH4JVRAKCY.jpg',20,3,1),
+('2','Salut mes pupuces nouveaux showcases a l''AZAR STUDIO 52 dimanche soir 23h','https://th.bing.com/th/id/OIP.CAf0BGuAyhkXHkAt98-PJwHaIf?rs=1&pid=ImgDetMain',10,5,1),
+('3','Vous pensez je mesure combien d''iphone','https://m1.quebecormedia.com/emp/emp/Capture_d_e_cran_le_2022_10_25_a_16.09.58661f1f0c-1963-4dc4-a971-4bb400402043_ORIGINAL.jpg?impolicy=crop-resize&x=0&y=49&w=1164&h=653&width=1200',13,11,1),
+('4','OMAR SY : L''INTERVIEW FACE CACHÉE Dispo sur YouTube  https://youtu.be/2yVrWk9WQ2s','https://www.agoravox.tv/local/cache-vignettes/L476xH268/omar-sy-interview-hugo-99372.jpg',8,35,1),
+('5','Il annonce qu''il jouera son dernier match avec le psg dimanche, temps gagné 3 min 40','https://web.cameroonmagazine.com/wp-content/uploads/2024/05/VIDEO-Kylian-Mbappe-annonce-publiquement-son-depart-du-PSG.jpg',18, 22,1);
 
 
 INSERT INTO COMMENTAIRE (IDCOMPTE, IDPOST, TEXTE) VALUES

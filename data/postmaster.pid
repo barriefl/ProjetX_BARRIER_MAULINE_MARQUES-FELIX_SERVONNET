@@ -1,16 +1,8 @@
 1
 /var/lib/postgresql/data
-<<<<<<< HEAD
-1743426294
+1743588379
 5432
 /var/run/postgresql
 *
-  3147207         0
-=======
-1743413499
-5432
-/var/run/postgresql
-*
-      905         5
->>>>>>> 20f69b864c0e1af47f508533e1e3fc8a806c7732
+  1400754         5
 ready   
