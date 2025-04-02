@@ -24,8 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!empty($description) && !empty($url) && !empty($idcompte)) {
 
         try {
-            $stmtinsert = $pdo->prepare("INSERT INTO POST (DESCRIPTION, URLIMAGE, IDCOMPTE, COMPTEURLIKE, COMPTEURRETWEET) VALUES (?, ?, ?, ?, ?)");
-            $stmtinsert->execute([$description, $url, $idcompte,$compteur,$compteur]);
+            $stmtinsert = $pdo->prepare("INSERT INTO POST (DESCRIPTION, URLIMAGE, IDCOMPTE, COMPTEURLIKE, COMPTEURRETWEET,COMPTEURCOMM) VALUES (?, ?, ?, ?, ?)");
+            $stmtinsert->execute([$description, $url, $idcompte,$compteur,$compteur,$compteur]);
 
         
             echo json_encode(["success" => true, "message" => "Post créé avec succès", "id" => $user_id]);

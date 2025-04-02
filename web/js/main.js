@@ -156,11 +156,14 @@ document.addEventListener("DOMContentLoaded", () => {
                             likes.textContent = parseInt(likes.textContent) + 1;
                             // Changer l'image du bouton de like
                             iconLike.classList.replace('bi-heart', 'bi-heart-fill'); // Remplacez par le chemin de votre image "liked"
+                            likesCount.textContent = ` · ${post.compteurlike +1} likes`;
+
                         } else {
                             // Incrémenter le compteur de likes
                             likes.textContent = parseInt(likes.textContent) - 1;
                             // Changer l'image du bouton de like
                             iconLike.classList.replace('bi-heart-fill', 'bi-heart'); // Remplacez par le chemin de votre image "liked"
+                            likesCount.textContent = ` · ${post.compteurlike } likes`;
                         }
                     })
                     .catch(error => console.error("Erreur lors du like du post :", error));

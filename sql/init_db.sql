@@ -164,13 +164,7 @@ INSERT INTO COMMENTAIRE (IDCOMPTE, IDPOST, TEXTE) VALUES
 (12,4,'Grave intéressant comme d''hab');
 
 
-INSERT INTO A_LIKE (IDCOMPTE, IDPOST) VALUES 
-(3, 2), (12, 4), (1, 5), (18, 3), (7, 1), 
-(14, 2), (9, 4), (11, 5), (5, 3), (6, 1),
-(13, 2), (17, 4), (8, 5), (2, 3), (4, 1),
-(16, 2), (10, 4), (15, 5), (12, 1), (3, 4),
-(9, 2), (18, 5), (1, 3), (7, 4), (14, 1),
-(8, 2), (16, 3), (5, 5), (6, 4), (11, 1);
+
 
 
 INSERT INTO A_RETWEET (IDCOMPTE, IDPOST, DESCRIPTIONRT, DATERT) VALUES 
