@@ -67,7 +67,7 @@ Le projet utilise PostreSQL pour stocker les données.
     - Et sur un navigateur ouvrir `http://localhost:12500`
 - Pour arrêter les services Docker :
     - `docker-compose down`
-- En une seule commande cela donne :
+- En une seule commande Powershell cela donne :
     - `git clone https://github.com/barriefl/ProjetX_BARRIER_MAULINE_MARQUES-FELIX_SERVONNET; cd ProjetX_BARRIER_MAULINE_MARQUES-FELIX_SERVONNET; docker-compose up -d; Start-Process "http://localhost:12500"`
 
 
